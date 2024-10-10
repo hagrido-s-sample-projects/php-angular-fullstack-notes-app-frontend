@@ -1,1 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Dosis:wght@200..800&family=Quicksand:wght@300..700&family=SUSE:wght@100..800&display=swap');
+
+@import "./assets/colors.scss";
+
+* {
+  font-family: 'Cabin', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $background-color;
+}
+
+.font-suse {
+  font-family: "SUSE", serif;
+  font-optical-sizing: auto;
+}
+
+.font-quicksand {
+  font-family: "Quicksand", serif;
+  font-optical-sizing: auto;
+}
+
+.font-dosis {
+  font-family: "Dosis", serif;
+  font-optical-sizing: auto;
+}
+
+.font-cabin {
+  font-family: "Cabin", serif;
+  font-optical-sizing: auto;
+}
