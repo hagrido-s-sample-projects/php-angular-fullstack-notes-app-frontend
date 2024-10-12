@@ -12,9 +12,16 @@ export class AuthService {
 
   login(username: string, password: string): Observable<string> {
     try {
-      
+      const backendUrl = process.env['BACKEND_URL'];
+      if (!backendUrl) {
+        throw new Error('BACKEND_URL is not defined in the environment variables');
+      }
+
+      return of(this.mockToken).pipe(
+        delay(1000) // Simulate network delay
+      );
     } catch (error) {
-      
+      return throwError(() => error);
     }
   }
 

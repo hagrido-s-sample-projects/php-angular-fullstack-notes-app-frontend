@@ -6,16 +6,16 @@
       <div class="card__divider"></div>
       <div class="card__form">
         <div class="card__form_input">
-          <input type="text" placeholder="Username" />
+          <input type="text" placeholder="Username" [(ngModel)]="username" name="username" />
         </div>
         <div class="card__form_input">
-          <input type="email" placeholder="Email" />
+          <input type="email" placeholder="Email" [(ngModel)]="email" name="email" />
         </div>
         <div class="card__form_input">
-          <input type="password" placeholder="Password" />
+          <input type="password" placeholder="Password" [(ngModel)]="password" name="password" />
         </div>
         <div class="card__form_input">
-          <input type="password" placeholder="Confirm password" />
+          <input type="password" placeholder="Confirm password" [(ngModel)]="confirmPassword" name="confirmPassword" />
         </div>
         <button class="card__form_button">Register</button>
       </div>
