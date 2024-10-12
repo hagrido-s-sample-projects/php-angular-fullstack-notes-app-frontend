@@ -12,17 +12,9 @@ export class AuthService {
 
   login(username: string, password: string): Observable<string> {
     try {
-    return new Observable<string>((observer) => {
-      // Simulate an API call with a delay
-      setTimeout(() => {
-        if (username === 'test' && password === 'password') {
-          observer.next(this.mockToken); // Return a mock token on success
-          observer.complete();
-        } else {
-          observer.error('Invalid credentials'); // Return an error on failure
-        }
-      }, 1000); // Simulate network delay
-    });
+      
+    } catch (error) {
+      
     }
   }
 
