@@ -1,0 +1,105 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .card {
+    min-width: 300px;
+    max-width: 400px;
+    width: 100%;
+    min-height: 250px;
+    padding: 16px;
+    border-radius: 16px;
+    background: #d4d4d4;
+    box-shadow:  13px 13px 26px #9b9b9b,
+    -13px -13px 26px #ffffff;
+
+    .card__title {
+      font-size: 36px;
+      font-weight: 200;
+      font-family: "Dosis", serif;
+      font-optical-sizing: auto;
+      text-align: center;
+    }
+
+    .card__divider {
+      width: 100%;
+      height: 1px;
+      background: #000;
+      margin: 16px 0;
+    }
+
+    .card__form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      .card__form_input {
+        width: 100%;
+        height: 40px;
+        border-radius: 8px;
+        background: #d4d4d4;
+        box-shadow: inset 5px 5px 10px #c3c3c3,
+        inset -5px -5px 10px #e5e5e5;
+  
+        input {
+          width: 100%;
+          height: 100%;
+          border: none;
+          outline: none;
+          background: transparent;
+          padding: 0 16px;
+          font-size: 14px;
+        }
+      }
+
+      .card__form_button {
+        width: 100%;
+        height: 40px;
+        border-radius: 8px;
+        background: #b3c1c8;
+        box-shadow:  5px 5px 10px #acb2b6,
+                    -5px -5px 10px #e5e5e5;
+        border: none;
+        outline: none;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+
+        transition: background 0.2s ease;
+
+        &:hover {
+          background: #b3c1c8;
+        }
+
+        &:active {
+          background: #b3c1c8;
+          box-shadow: inset 5px 5px 10px #acb2b6,
+                      inset -5px -5px 10px #bec6ca;
+        }
+      }
+    }
+  }
+
+  .card-footer {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+    padding: 16px;
+    border-radius: 16px;
+    background: #d4d4d4;
+    box-shadow: inset 5px 5px 10px #b4b4b4,
+    inset -5px -5px 10px #f4f4f4;
+  }
+
+  .card-footer__link {
+    text-decoration: none;
+    color: #000;
+    font-size: 15px;
+  }
+}

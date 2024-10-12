@@ -1,0 +1,81 @@
+@import "../../assets/colors.scss";
+
+.container {
+  .header {
+    height: 60px;
+    width: calc(100% - 72px);
+    background: #d4d4d4;
+    box-shadow:  13px 13px 26px #9b9b9b,
+    -13px -13px 26px #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding: 0 20px;
+    margin: 16px;
+    border-radius: 16px;
+
+    .header__title {
+      font-size: 28px;
+      font-weight: 400;
+      font-family: "Dosis", serif;
+      font-optical-sizing: auto;
+
+      .header__title_bold {
+        font-weight: 600;
+        font-family: "Dosis", serif;
+        font-optical-sizing: auto;
+      }
+    }
+
+    .spacer {
+      flex: 1;
+    }
+
+    .header__actions {
+      display: flex;
+      gap: 16px;
+    }
+
+    .header__button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: #d4d4d4;
+      box-shadow:  5px 5px 10px #c3c3c3,
+                  -5px -5px 10px #e5e5e5;
+
+
+      transition: all 0.15s ease-out;
+
+      &:active {
+        background: #d4d4d4;
+        box-shadow: inset 5px 5px 10px #c3c3c3,
+                    inset -5px -5px 10px #e5e5e5;
+      }
+    }
+
+    .header__button_primary {
+      background-color: $primary-color;
+      color: #000;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      padding: 6px 16px;
+      border-radius: 8px;
+
+      transition: all 0.15s ease-out;
+
+      &:hover {
+        background-color: lighten($primary-color, 5%);
+      }
+
+      &:active {
+        background-color: lighten($primary-color, 6%);
+        transform: scale(0.95);
+      }
+    }
+  }
+}
