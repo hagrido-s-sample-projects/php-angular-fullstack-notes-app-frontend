@@ -7,16 +7,12 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideHttpClient } from '@angular/common/http';
 
 import { routes } from './app.routes';
-import { authReducer } from './store/auth.reducer';
-import { AuthEffects } from './store/auth.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(),
-    provideStore({ auth: authReducer }),
-    provideEffects([AuthEffects]),
     provideStoreDevtools({ maxAge: 25, logOnly: true }),
     provideHttpClient()
   ]
