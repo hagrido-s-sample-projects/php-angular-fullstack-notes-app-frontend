@@ -6,14 +6,20 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
+  private apiUrl = 'http://your-api-url'; // Replace with your actual API URL
+
   constructor(private http: HttpClient) {}
 
-  login(username: string, password: string): Observable<string> {
-    return this.http.post<string>('/api/auth/login', { username, password });
+  login(username: string, password: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/api/auth/login`, { username, password });
   }
 
-  register(username: string, email: string, password: string): Observable<void> {
-    return this.http.post<void>('/api/auth/register', { username, email, password });
+  register(username: string, email: string, password: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/api/auth/register`, { username, email, password });
+  }
+
+  logout(): Observable<any> {
+    // If your backend requires a logout API call
+    return this.http.post(`${this.apiUrl}/api/auth/logout`, {});
   }
 }
-
