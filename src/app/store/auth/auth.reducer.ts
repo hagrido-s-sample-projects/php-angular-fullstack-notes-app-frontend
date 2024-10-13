@@ -1,20 +1,32 @@
-import { Action } from "@ngrx/store";
-import { Session } from "../../models/session.model";
-import { act } from "@ngrx/effects";
+import { createReducer, on } from '@ngrx/store';
+import * as AuthActions from './auth.actions';
+import { Session } from '../../models/session.model';
 
 export interface AuthState {
-  isAuthenticated: boolean | null;
+  isAuthenticated: boolean;
   session: Session | null;
+  error: any;
 }
 
 export const initialAuthState: AuthState = {
-  isAuthenticated: null,
+  isAuthenticated: false,
   session: null,
+  error: null,
 };
 
-export function authReducer(state = initialAuthState, action: Action) {
-  switch (action.type) {
-    default:
-      return state;
-  }
-}
+export const authReducer = createReducer(
+  initialAuthState,
+  on(AuthActions.loginSuccess, (state, { session }) => ({
+    ...state,
+    isAuthenticated: true,
+    session,
+    error: null,
+  })),
+  on(AuthActions.loginFailure, (state, { error }) => ({
+    ...state,
+    isAuthenticated: false,
+    session: null,
+    error,
+  })),
+  on(AuthActions.logout, () => initialAuthState)
+);
