@@ -18,7 +18,7 @@ export class RegisterComponent {
   constructor(private authService: AuthService) {}
 
   register() {
-    this.authService.register(this.username, this.email, this.password).subscribe(
+    this.authService.register(this.username, this.email, this.password).then(
       (response) => {
         console.log('Registration successful', response);
         // Handle successful registration (e.g., navigate to login page)
