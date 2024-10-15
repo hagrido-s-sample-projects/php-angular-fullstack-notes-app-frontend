@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,17 +7,18 @@ import { Observable } from 'rxjs';
 export class AuthService {
   private apiUrl = 'http://your-api-url'; // Replace with your actual API URL
 
-  constructor(private http: HttpClient) {}
-
   login(username: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/api/auth/login`, { username, password });
+    console.log(username, password);
+    return of({});
   }
 
   register(username: string, email: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/api/auth/register`, { username, email, password });
+    console.log(username, email, password);
+    return of({});
   }
 
   logout(): Observable<any> {
-    return this.http.post(`${this.apiUrl}/api/auth/logout`, {});
+    console.log('logout');
+    return of({});
   }
 }
