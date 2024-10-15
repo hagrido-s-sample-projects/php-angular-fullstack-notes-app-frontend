@@ -5,12 +5,15 @@ import { provideEffects } from '@ngrx/effects';
 import { authReducer } from './app/store/auth/auth.reducer';
 import { AuthEffects } from './app/store/auth/auth.effects';
 import { provideHttpClient } from '@angular/common/http';
+import { routes } from './app/app.routes';
+import { provideRouter } from '@angular/router';
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideStore({ auth: authReducer }),
     provideEffects([AuthEffects]),
-    provideHttpClient()
+    provideHttpClient(),
+    provideRouter(routes)
   ],
 }).catch(err => {
   console.error('Error during bootstrap:', err);
