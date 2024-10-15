@@ -5,7 +5,7 @@
       <div class="card__subtitle">Create account in the most useless notes in the world!</div>
       <div class="card__divider"></div>
       <div class="card__form">
-        <form (ngSubmit)="onRegister(username.value, email.value, password.value)" class="card__form">
+        <div class="card__form">
           <div class="card__form_input">
             <input type="text" #username placeholder="Username" required />
           </div>
@@ -15,8 +15,8 @@
           <div class="card__form_input">
             <input type="password" #password placeholder="Password" required />
           </div>
-          <button class="card__form_button">Register</button>
-        </form>
+          <button class="card__form_button" (click)="register(username.value, email.value, password.value)">Register</button>
+        </div>
       </div>
     </div>
     <div class="card-footer">
