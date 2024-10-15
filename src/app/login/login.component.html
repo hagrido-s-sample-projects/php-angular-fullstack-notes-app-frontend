@@ -6,7 +6,7 @@
       </div>
       <div class="card__divider"></div>
       <div class="card__form">
-        <form (ngSubmit)="onLogin(username.value, password.value)">
+        <form (ngSubmit)="onLogin(username.value, password.value)" class="card__form">
           <div class="card__form_input username_input">
             <input type="text" #username placeholder="Username" required />
           </div>
