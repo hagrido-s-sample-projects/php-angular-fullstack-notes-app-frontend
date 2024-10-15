@@ -7,15 +7,15 @@
       <div class="card__form">
         <div class="card__form">
           <div class="card__form_input">
-            <input type="text" #username placeholder="Username" required />
+            <input type="text" [(ngModel)]="username" placeholder="Username" required />
           </div>
           <div class="card__form_input">
-            <input type="email" #email placeholder="Email" required />
+            <input type="email" [(ngModel)]="email" placeholder="Email" required />
           </div>
           <div class="card__form_input">
-            <input type="password" #password placeholder="Password" required />
+            <input type="password" [(ngModel)]="password" placeholder="Password" required />
           </div>
-          <button class="card__form_button" (click)="register(username.value, email.value, password.value)">Register</button>
+          <button class="card__form_button" (click)="register()">Register</button>
         </div>
       </div>
     </div>
