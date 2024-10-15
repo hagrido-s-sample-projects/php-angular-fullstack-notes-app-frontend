@@ -9,5 +9,5 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'frontend';
+  // You can remove the isAuthenticated$ observable and related logic
 }

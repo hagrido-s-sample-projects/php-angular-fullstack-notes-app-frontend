@@ -6,13 +6,15 @@
       </div>
       <div class="card__divider"></div>
       <div class="card__form">
-        <div class="card__form_input username_input">
-          <input type="text" placeholder="Username" />
-        </div>
-        <div class="card__form_input password_input">
-          <input type="password" placeholder="Password" />
-        </div>
-        <button class="card__form_button">Login</button>
+        <form (ngSubmit)="onLogin(username.value, password.value)">
+          <div class="card__form_input username_input">
+            <input type="text" #username placeholder="Username" required />
+          </div>
+          <div class="card__form_input password_input">
+            <input type="password" #password placeholder="Password" required />
+          </div>
+          <button type="submit" class="card__form_button">Login</button>
+        </form>
       </div>
     </div>
     <div class="card-footer">

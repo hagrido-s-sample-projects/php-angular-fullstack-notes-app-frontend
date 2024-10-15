@@ -1,6 +1,18 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
+import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+import { authReducer } from './app/store/auth/auth.reducer';
+import { AuthEffects } from './app/store/auth/auth.effects';
+import { provideHttpClient } from '@angular/common/http';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideStore({ auth: authReducer }),
+    provideEffects([AuthEffects]),
+    provideHttpClient()
+  ],
+}).catch(err => {
+  console.error('Error during bootstrap:', err);
+  console.error('Stack trace:', err.stack);
+});

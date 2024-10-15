@@ -19,7 +19,6 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    // If your backend requires a logout API call
     return this.http.post(`${this.apiUrl}/api/auth/logout`, {});
   }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-login',
@@ -10,4 +11,10 @@ import { RouterOutlet, RouterLink } from '@angular/router';
 })
 export class LoginComponent {
   title = 'Login';
+
+  constructor(private store: Store) {}
+
+  onLogin(username: string, password: string) {
+    console.log(username, password);
+  }
 }
