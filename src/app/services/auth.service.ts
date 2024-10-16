@@ -13,21 +13,25 @@ export class AuthService {
     return of({});
   }
 
-  async register(username: string, email: string, password: string): Promise<{status: string, message: string, accessToken: string | null, refreshToken: string | null}> {
-    console.log(username, email, password);
-    if (!username || !email || !password) {
-      return {status: 'error', message: 'All fields are required', accessToken: null, refreshToken: null};
+  async register(username: string, email: string, password: string): Promise<any> {
+    try {
+      const response = await fetch(`http://localhost:8000/api/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, email, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Registration failed');
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Registration error:', error);
+      throw error;
     }
-
-    const response = await fetch(`${this.apiUrl}/api/auth/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({username, email, password}),
-    });
-
-    return {status: 'success', message: 'Registration successful', accessToken: '1234567890', refreshToken: '1234567890'};
   }
 
   logout(): Observable<any> {
