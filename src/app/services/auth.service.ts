@@ -1,41 +1,25 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { environment } from '../../enviroment/enviroment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl: string = environment.apiUrl || 'http://localhost:8000';
+  private apiUrl = 'http://localhost:8000';
+
+  constructor(private http: HttpClient) {}
 
   login(username: string, password: string): Observable<any> {
-    console.log(username, password);
-    return of({});
+    return this.http.post(`${this.apiUrl}/api/auth/login`, { username, password });
   }
 
-  async register(username: string, email: string, password: string): Promise<any> {
-    try {
-      const response = await fetch(`http://localhost:8000/api/auth/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, email, password }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Registration failed');
-      }
-
-      return await response.json();
-    } catch (error) {
-      console.error('Registration error:', error);
-      throw error;
-    }
+  register(username: string, email: string, password: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/api/auth/register`, { username, email, password });
   }
 
   logout(): Observable<any> {
-    console.log('logout');
-    return of({});
+    return this.http.post(`${this.apiUrl}/api/auth/logout`, {});
   }
 }
