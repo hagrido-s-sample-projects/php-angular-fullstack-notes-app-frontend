@@ -13,6 +13,7 @@ export class AuthEffects {
   private actions$ = inject(Actions);
   private authService = inject(AuthService);
   private router = inject(Router);
+
   login$ = createEffect(() => 
     this.actions$.pipe(
       ofType(AuthActions.login),
@@ -30,6 +31,16 @@ export class AuthEffects {
         )
       )
     )
+  );
+
+  loginSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.loginSuccess),
+      tap(() => {
+        this.router.navigate(['/dashboard']);
+      })
+    ),
+    { dispatch: false }
   );
 
   register$ = createEffect(() =>
