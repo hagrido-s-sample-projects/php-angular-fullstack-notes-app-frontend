@@ -1,31 +1,29 @@
 import { createReducer, on } from '@ngrx/store';
 import * as AuthActions from './auth.actions';
-import { Session } from '../../models/session.model';
 
 export interface AuthState {
   isAuthenticated: boolean;
-  session: Session | null;
-  error: any;
+  accessToken: string | null;
+  error: { status: string; message: string } | null;
 }
 
 export const initialAuthState: AuthState = {
   isAuthenticated: false,
-  session: null,
+  accessToken: null,
   error: null,
 };
 
 export const authReducer = createReducer(
   initialAuthState,
-  on(AuthActions.loginSuccess, (state, { session }) => ({
+  on(AuthActions.loginSuccess, (state, { accessToken }) => ({
     ...state,
     isAuthenticated: true,
-    session,
-    error: null,
+    accessToken,
   })),
   on(AuthActions.loginFailure, (state, { error }) => ({
     ...state,
     isAuthenticated: false,
-    session: null,
+    accessToken: null,
     error,
   })),
   on(AuthActions.logout, () => initialAuthState)

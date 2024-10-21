@@ -8,9 +8,9 @@ export const selectIsAuthenticated = createSelector(
   (state: AuthState) => state.isAuthenticated
 );
 
-export const selectSession = createSelector(
+export const selectAccessToken = createSelector(
   selectAuthState,
-  (state: AuthState) => state.session
+  (state: AuthState) => state.accessToken
 );
 
 export const selectAuthError = createSelector(
