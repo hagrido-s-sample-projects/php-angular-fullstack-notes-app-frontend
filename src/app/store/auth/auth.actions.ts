@@ -1,5 +1,4 @@
 import { createAction, props } from "@ngrx/store";
-import { Session } from "../../models/session.model";
 
 export const login = createAction('[Auth] Login', props<{ username: string; password: string }>());
 export const loginSuccess = createAction('[Auth] Login Success', props<{ accessToken: string, refreshToken: string }>());
