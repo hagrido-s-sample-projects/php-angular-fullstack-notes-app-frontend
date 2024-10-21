@@ -6,7 +6,16 @@
         Notes
       </span>
       <span class="spacer"></span>
-      <button class="header__button">Menu</button>
+      <div class="menu__wrapper">
+        <button class="header__button" (click)="isMenuOpen = !isMenuOpen">Menu</button>
+        <div class="menu__content" [ngClass]="{'menu__content_open': isMenuOpen}">
+          <button class="menu__content_button">Your Profile</button>
+          <button class="menu__content_button">Archive</button>
+          <button class="menu__content_button">Trash</button>
+          <button class="menu__content_button">Settings</button>
+          <button class="menu__content_button">Logout</button>
+        </div>
+      </div>
     </div>
   </div>
 </main>
