@@ -42,6 +42,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   register() {
     if (this.username && this.email && this.password) {
+      this.errorMessage = null;
       this.store.dispatch(AuthActions.register({ username: this.username, email: this.email, password: this.password }));
     } else {
       this.errorMessage = 'All fields are required';
