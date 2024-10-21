@@ -16,6 +16,7 @@
             <input type="password" [(ngModel)]="password" placeholder="Password" required />
           </div>
           <button class="card__form_button" (click)="register()">Register</button>
+          <div class="card__form_error" *ngIf="errorMessage">{{ errorMessage }}</div>
         </div>
       </div>
     </div>
