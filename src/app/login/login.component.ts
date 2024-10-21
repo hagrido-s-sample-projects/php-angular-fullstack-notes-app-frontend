@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink, Router } from '@angular/router';
+import { RouterOutlet, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AuthService } from '../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
+import * as AuthActions from '../store/auth/auth.actions';
+import { selectAccessToken } from '../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-login',
@@ -19,9 +20,14 @@ export class LoginComponent {
   password: string = '';
   errorMessage: string | null = null;
 
-  constructor(private store: Store, private authService: AuthService, private router: Router) {}
+  constructor(private store: Store) {}
 
   login() {
-    
+    if (this.username && this.password) {
+      this.errorMessage = null;
+      this.store.dispatch(AuthActions.login({ username: this.username, password: this.password }));
+    } else {
+      this.errorMessage = 'All fields are required';
+    }
   }
 }
