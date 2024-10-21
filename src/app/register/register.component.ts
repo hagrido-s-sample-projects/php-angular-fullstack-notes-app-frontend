@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-import { firstValueFrom } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -16,21 +16,17 @@ export class RegisterComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private authService: AuthService) {}
+  errorMessage: string | null = null;
+
+  constructor(private authService: AuthService, private router: Router) {}
 
   register() {
     this.authService.register(this.username, this.email, this.password).subscribe(
-      (response) => {
-        console.log('Registration successful', response);
-        // Handle successful registration (e.g., navigate to login page)
-      },
-      (error) => {
-        if (error.status === 409) {
-          console.error('Email already exists');
-          // Display appropriate message to the user
+      res => {
+        if (res.status === 'SUCCESS') {
+          this.router.navigate(['/login']);
         } else {
-          console.error('Registration failed', error);
-          // Handle other types of errors
+          this.errorMessage = res.error || 'Something went wrong';
         }
       }
     );
