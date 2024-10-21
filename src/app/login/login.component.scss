@@ -15,7 +15,9 @@
     border-radius: 16px;
     background: #d4d4d4;
     box-shadow:  13px 13px 26px #9b9b9b,
-    -13px -13px 26px #ffffff;
+                 -13px -13px 26px #ffffff;
+    display: flex;
+    flex-direction: column;
 
     .card__title {
       font-size: 36px;
@@ -36,7 +38,6 @@
       display: flex;
       flex-direction: column;
       gap: 16px;
-
       .card__form_input {
         width: 100%;
         height: 40px;
@@ -80,6 +81,14 @@
           box-shadow: inset 5px 5px 10px #acb2b6,
                       inset -5px -5px 10px #bec6ca;
         }
+      }
+
+      .card__form_error {
+        width: 100%;
+        color: #df1947;
+        font-size: 16px;
+        font-weight: 600;
+        text-align: center;
       }
     }
   }
