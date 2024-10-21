@@ -21,13 +21,14 @@ export class AuthEffects {
         this.authService.login(username, password).pipe(
           map(response => {
             if (response.status === 'SUCCESS' && response.access_token && response.refresh_token) {
+              localStorage.setItem('access_token', response.access_token);
+              localStorage.setItem('refresh_token', response.refresh_token);
               return AuthActions.loginSuccess({ accessToken: response.access_token, refreshToken: response.refresh_token });
-            } else if (response.status === 'INVALID_CREDENTIALS') {
-              return AuthActions.loginFailure({ error: { status: 'INVALID_CREDENTIALS', message: 'Username or password is incorrect' } });
             } else {
               return AuthActions.loginFailure({ error: { status: response.status, message: response.error || 'An unknown error occurred' } });
             }
-          })
+          }),
+          catchError(error => of(AuthActions.loginFailure({ error: { status: 'ERROR', message: error.message } })))
         )
       )
     )
@@ -69,5 +70,19 @@ export class AuthEffects {
       })
     ),
     { dispatch: false }
+  );
+
+  initializeAuth$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.initializeAuth),
+      map(() => {
+        const accessToken = localStorage.getItem('access_token');
+        const refreshToken = localStorage.getItem('refresh_token');
+        if (accessToken && refreshToken) {
+          return AuthActions.setTokens({ accessToken, refreshToken });
+        }
+        return AuthActions.logout();
+      })
+    )
   );
 }
