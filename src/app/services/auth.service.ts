@@ -11,8 +11,26 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(username: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/api/auth/login`, { username, password });
+  login(username: string, password: string): Observable<{status: string, error?: string, access_token?: string, refresh_token?: string}> {
+    return this.http.post<any>(`${this.apiUrl}/api/auth/login`, { username, password }, { observe: 'response' })
+      .pipe(
+        map(response => {
+          if (response.status === 200 && response.body?.status === 'SUCCESS') {
+            return { 
+              status: 'SUCCESS', 
+              access_token: response.body.access_token,
+              refresh_token: response.body.refresh_token
+            };
+          } else if (response.status === 401 && response.body?.status === 'INVALID_CREDENTIALS') {
+            return { status: 'INVALID_CREDENTIALS', error: response.body?.error };
+          } else {
+            return { status: 'ERROR', error: response.body?.error };
+          }
+        }),
+        catchError(error => {
+          return of({ status: 'ERROR', error: error.error?.error || 'Internal server error, please try again later' });
+        })
+      )
   }
 
   register(username: string, email: string, password: string): Observable<{status: string, error?: string}> {
@@ -20,13 +38,13 @@ export class AuthService {
       .pipe(
         map(response => {
           if (response.status === 201) {
-            return { status: 'success' };
+            return { status: 'SUCCESS' };
           } else {
-            return { status: 'error', error: response.body?.error };
+            return { status: 'ERROR', error: response.body?.error };
           }
         }),
         catchError(error => {
-          return of({ status: 'error', error: error.error?.error || 'Internal server error, please try again later' });
+          return of({ status: 'ERROR', error: error.error?.error || 'Internal server error, please try again later' });
         })
       )
   }
