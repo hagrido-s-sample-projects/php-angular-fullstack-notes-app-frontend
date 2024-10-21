@@ -1,14 +1,15 @@
 import { Component, ElementRef, HostListener } from '@angular/core';
 import { NgClass } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-dashboard-layout',
   standalone: true,
-  imports: [NgClass],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  imports: [NgClass, RouterOutlet],
+  templateUrl: './dashboard-layout.component.html',
+  styleUrl: './dashboard-layout.component.scss'
 })
-export class DashboardComponent {
+export class DashboardLayoutComponent {
   isMenuOpen = false;
 
   constructor(private elementRef: ElementRef) {}
