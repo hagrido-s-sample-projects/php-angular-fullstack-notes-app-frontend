@@ -26,5 +26,13 @@ export const authReducer = createReducer(
     accessToken: null,
     error,
   })),
-  on(AuthActions.logout, () => initialAuthState)
+  on(AuthActions.logout, () => initialAuthState),
+  on(AuthActions.registerSuccess, (state) => ({
+    ...state,
+    error: null
+  })),
+  on(AuthActions.registerFailure, (state, { error }) => ({
+    ...state,
+    error,
+  }))
 );
