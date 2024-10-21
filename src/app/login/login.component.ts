@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { RouterOutlet, RouterLink, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +13,9 @@ import { Store } from '@ngrx/store';
 export class LoginComponent {
   title = 'Login';
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private authService: AuthService, private router: Router) {}
 
   onLogin(username: string, password: string) {
-    console.log(username, password);
+    
   }
 }
