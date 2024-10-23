@@ -13,10 +13,21 @@
     </button>
     <div class="create-note-dialog-background" *ngIf="isCreateDialogOpen">
       <div class="create-note-dialog">
-        <div class="create-note-dialog__header">Create Note</div>
         <div class="create-note-dialog__content">
-          <input type="text" placeholder="Title" />
-          <textarea placeholder="Note content"></textarea>
+          <button class="create-note-dialog__close-button" (click)="closeCreateDialog()">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 12L12 20" stroke="black" stroke-width="2.66667" stroke-linecap="round"/>
+              <path d="M12 12L20 20" stroke="black" stroke-width="2.66667" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div class="create-note-dialog__header">Create Note</div>
+          <div class="create-note-dialog__form-content">
+            <div class="card__form_input">
+              <input type="text" [(ngModel)]="noteTitle" placeholder="Note Title" required />
+            </div>
+            <button class="card__form_button" (click)="createNote()">Create Note</button>
+            <div class="card__form_error" *ngIf="errorMessage">{{ errorMessage }}</div>
+          </div>
         </div>
       </div>
     </div>

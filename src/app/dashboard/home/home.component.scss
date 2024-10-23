@@ -70,12 +70,119 @@
   }
 
   .create-note-dialog {
-    width: 500px;
-    height: 300px;
-    background-color: #e6e6e6;
+    width: 400px;
+    min-height: 120px;
+    background-color: #d9d9d9;
     border-radius: 16px;
     padding: 16px;
-    box-shadow: 6.5px 6.5px 13px #b8b8b8,
-                -6.5px -6.5px 13px #ffffff;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ffffff;
+
+    .create-note-dialog__header {
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .create-note-dialog__content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      .create-note-dialog__close-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: none;
+        border: none;
+        cursor: pointer;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #ff6b6b;
+        box-shadow: 4px 4px 8px #c3c3c3, -4px -4px 8px #f5f5f5;
+        transition: all 0.3s ease;
+
+        &:hover {
+          box-shadow: 6px 6px 10px #c3c3c3, -6px -6px 10px #f5f5f5;
+        }
+
+        &:active {
+          box-shadow: inset 4px 4px 8px #e66060, 
+                      inset -4px -4px 8px #ff7676;
+        }
+
+        svg {
+          width: 20px;
+          height: 20px;
+          
+          path {
+            stroke: #ffffff;
+          }
+        }
+      }
+
+      .create-note-dialog__form-content {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        .card__form_input {
+          width: 100%;
+          height: 40px;
+          border-radius: 8px;
+          background: #d4d4d4;
+          box-shadow: inset 5px 5px 10px #c3c3c3,
+          inset -5px -5px 10px #e5e5e5;
+    
+          input {
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+            background: transparent;
+            padding: 0 16px;
+            font-size: 14px;
+          }
+        }
+
+        .card__form_button {
+          width: 100%;
+          height: 40px;
+          border-radius: 8px;
+          background: #b3c1c8;
+          box-shadow:  5px 5px 10px #acb2b6,
+                      -5px -5px 10px #e5e5e5;
+          border: none;
+          outline: none;
+          font-size: 14px;
+          font-weight: 600;
+          cursor: pointer;
+
+          transition: background 0.2s ease;
+
+          &:hover {
+            background: #b3c1c8;
+          }
+
+          &:active {
+            background: #b3c1c8;
+            box-shadow: inset 5px 5px 10px #acb2b6,
+                        inset -5px -5px 10px #bec6ca;
+          }
+        }
+
+        .card__form_error {
+          width: 100%;
+          color: #df1947;
+          font-size: 16px;
+          font-weight: 600;
+          text-align: center;
+        }
+      }
+    }
   }
 }
