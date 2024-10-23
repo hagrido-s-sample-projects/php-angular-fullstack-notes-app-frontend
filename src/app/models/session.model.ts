@@ -1,10 +1,10 @@
-import { User } from "./user.model";
+import { User } from './user.model';
+import { Token } from './token.model';
 
 export interface Session {
-  id: number;
-  user: User;
-  accessToken: string;
-  refreshToken: string;
+  id: number | null;
+  userId: number; // Reference to the user, not the full user object
+  tokens: Token[];
   isRevoked: boolean;
   createdAt: Date;
 }
