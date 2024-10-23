@@ -1,5 +1,3 @@
-import { Note } from './note.model';
-
 export interface User {
   id: number | null;
   email: string;
