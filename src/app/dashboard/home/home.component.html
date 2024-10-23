@@ -23,7 +23,7 @@
           <div class="create-note-dialog__header">Create Note</div>
           <div class="create-note-dialog__form-content">
             <div class="card__form_input">
-              <input type="text" [(ngModel)]="noteTitle" placeholder="Note Title" required />
+              <input type="text" [(ngModel)]="noteTitle" placeholder="Note Title (optional)" required />
             </div>
             <button class="card__form_button" (click)="createNote()">Create Note</button>
             <div class="card__form_error" *ngIf="errorMessage">{{ errorMessage }}</div>
