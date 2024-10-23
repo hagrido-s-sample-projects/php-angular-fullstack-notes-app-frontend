@@ -7,12 +7,15 @@ import * as AuthActions from './auth.actions';
 import { Session } from '../../models/session.model';
 import { User } from '../../models/user.model';
 import { Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
+import { PLATFORM_ID } from '@angular/core';
 
 @Injectable()
 export class AuthEffects { 
   private actions$ = inject(Actions);
   private authService = inject(AuthService);
   private router = inject(Router);
+  private platformId = inject(PLATFORM_ID);
 
   login$ = createEffect(() => 
     this.actions$.pipe(
@@ -21,8 +24,10 @@ export class AuthEffects {
         this.authService.login(username, password).pipe(
           map(response => {
             if (response.status === 'SUCCESS' && response.access_token && response.refresh_token) {
-              localStorage.setItem('access_token', response.access_token);
-              localStorage.setItem('refresh_token', response.refresh_token);
+              if (isPlatformBrowser(this.platformId)) {
+                localStorage.setItem('access_token', response.access_token);
+                localStorage.setItem('refresh_token', response.refresh_token);
+              }
               return AuthActions.loginSuccess({ accessToken: response.access_token, refreshToken: response.refresh_token });
             } else {
               return AuthActions.loginFailure({ error: { status: response.status, message: response.error || 'An unknown error occurred' } });
@@ -76,10 +81,12 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.initializeAuth),
       map(() => {
-        const accessToken = localStorage.getItem('access_token');
-        const refreshToken = localStorage.getItem('refresh_token');
-        if (accessToken && refreshToken) {
-          return AuthActions.setTokens({ accessToken, refreshToken });
+        if (isPlatformBrowser(this.platformId)) {
+          const accessToken = localStorage.getItem('access_token');
+          const refreshToken = localStorage.getItem('refresh_token');
+          if (accessToken && refreshToken) {
+            return AuthActions.setTokens({ accessToken, refreshToken });
+          }
         }
         return AuthActions.logout();
       })
