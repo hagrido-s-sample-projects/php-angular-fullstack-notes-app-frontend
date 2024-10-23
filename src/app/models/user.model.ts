@@ -1,4 +1,3 @@
-import { Session } from './session.model';
 import { Note } from './note.model';
 
 export interface User {
