@@ -2,7 +2,7 @@
   <div class="container">
     <div class="header">You don't have any notes yet.</div>
     <div class="subheader">Create a new note to get started.</div>
-    <button class="action-button">
+    <button class="action-button" (click)="showCreateNoteDialog()">
       <div class="action-button__content">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M16 5.33333V26.6667" stroke="black" stroke-width="2.66667" stroke-linecap="round"/>
@@ -11,5 +11,14 @@
         <span>New Note</span>
       </div>
     </button>
+    <div class="create-note-dialog-background" *ngIf="isCreateDialogOpen">
+      <div class="create-note-dialog">
+        <div class="create-note-dialog__header">Create Note</div>
+        <div class="create-note-dialog__content">
+          <input type="text" placeholder="Title" />
+          <textarea placeholder="Note content"></textarea>
+        </div>
+      </div>
+    </div>
   </div>
 </main>
