@@ -16,6 +16,15 @@
       </div>
       <div *ngIf="notes.length > 0" class="container__notes-section">
         <div class="container__notes-section__header">Your Notes</div>
+        <div class="container__notes-section__grid__item container__notes-section__grid__item--new" (click)="showCreateNoteDialog()">
+          <div class="container__notes-section__grid__item__title container__notes-section__grid__item__title--new">
+            Add New Note
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 5.33333V26.6667" stroke="black" stroke-width="2.66667" stroke-linecap="round"/>
+              <path d="M5.33333 16H26.6667" stroke="black" stroke-width="2.66667" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
         <div class="container__notes-section__grid">
           <div *ngFor="let note of notes" class="container__notes-section__grid__item">
             <div class="container__notes-section__grid__item__title">{{ note.title }}</div>
