@@ -1,7 +1,26 @@
 @import "../../assets/colors.scss";
 
 .container {
+  position: relative;
+  padding-top: 92px; // 60px (header height) + 16px (top margin) + 16px (extra space)
+
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 76px; // Reduced to show content under bottom padding
+    background: #d4d4d4;
+    z-index: 999; // Just below the header
+  }
+
   .header {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    z-index: 1000;
     height: 60px;
     width: calc(100% - 72px);
     background: #d4d4d4;
@@ -11,7 +30,6 @@
     align-items: center;
     justify-content: left;
     padding: 0 20px;
-    margin: 16px;
     border-radius: 16px;
 
     .header__title {

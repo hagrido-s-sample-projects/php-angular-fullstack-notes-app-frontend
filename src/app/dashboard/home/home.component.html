@@ -18,7 +18,8 @@
         <div class="container__notes-section__header">Your Notes</div>
         <div class="container__notes-section__grid">
           <div *ngFor="let note of notes" class="container__notes-section__grid__item">
-            <h3 class="container__notes-section__grid__item__title">{{ note.title }}</h3>
+            <div class="container__notes-section__grid__item__title">{{ note.title }}</div>
+            <div class="container__notes-section__grid__item__underline"></div>
             <p class="container__notes-section__grid__item__content">{{ note.content }}</p>
           </div>
         </div>
