@@ -2,11 +2,11 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { NoteState } from './note.reducer';
 import { Note } from '../../models/note.model';
 
-export const selectNoteState = createFeatureSelector<NoteState>('note');
+export const selectNoteState = createFeatureSelector<any>('notes');
 
 export const selectAllNotes = createSelector(
   selectNoteState,
-  (state: NoteState) => state.notes
+  (state: any) => state.notes
 );
 
 export const selectNoteById = (noteId: number) => createSelector(

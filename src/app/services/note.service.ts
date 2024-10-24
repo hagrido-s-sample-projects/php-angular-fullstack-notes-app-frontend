@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, Observable, of } from 'rxjs';
+import { Note } from '../models/note.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,21 @@ export class NoteService {
           } else {
             return { status: 'ERROR', error: response.error };
           }
+        }),
+        catchError(error => {
+          return of({ status: 'ERROR', error: error.error?.error || 'Internal server error, please try again later' });
+        })
+      );
+  }
+
+  getNotes(): Observable<{status: string, notes?: any[], error?: string}> {
+    const accessToken = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
+
+    return this.http.get<any>(`${this.apiUrl}/api/note`, { headers })
+      .pipe(
+        map(response => {
+          return { status: 'SUCCESS', notes: response.notes };
         }),
         catchError(error => {
           return of({ status: 'ERROR', error: error.error?.error || 'Internal server error, please try again later' });

@@ -28,4 +28,20 @@ export class NoteEffects {
       })
     )
   );
+
+  getNotes$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(NoteActions.getNotes),
+      switchMap(() => this.noteService.getNotes().pipe(
+        map(response => {
+          if (response.status === 'SUCCESS' && response.notes) {
+            return NoteActions.getNotesSuccess({ notes: response.notes });
+          } else {
+            return NoteActions.getNotesFailure({ error: response.error || 'Unknown error occurred' });
+          }
+        }),
+        catchError(error => of(NoteActions.getNotesFailure({ error: error.message })))
+      ))
+    )
+  );
 }
