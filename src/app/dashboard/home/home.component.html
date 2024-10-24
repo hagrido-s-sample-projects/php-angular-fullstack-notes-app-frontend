@@ -20,7 +20,7 @@
           <div *ngFor="let note of notes" class="container__notes-section__grid__item">
             <div class="container__notes-section__grid__item__title">{{ note.title }}</div>
             <div class="container__notes-section__grid__item__underline"></div>
-            <p class="container__notes-section__grid__item__content">{{ note.content }}</p>
+            <p class="container__notes-section__grid__item__content">{{ note.content === '' ? 'No content' : note.content }}</p>
           </div>
         </div>
       </div>
