@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import * as NoteActions from '../../store/note/note.actions';
 import { Observable } from 'rxjs';
 import * as NoteSelectors from '../../store/note/note.selectors';
+import { Note } from '../../models/note.model';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ import * as NoteSelectors from '../../store/note/note.selectors';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
-  notes$: Observable<any[]>;
+  notes$: Observable<Note[]>;
 
   isCreateDialogOpen = false;
   noteTitle: string = '';
