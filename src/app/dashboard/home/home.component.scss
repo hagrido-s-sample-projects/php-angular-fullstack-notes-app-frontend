@@ -8,20 +8,20 @@
   justify-content: center;
   gap: 8px;
 
-  .header {
+  &__header {
     font-size: 36px;
     font-weight: 200;
     font-family: "Dosis", serif;
   }
 
-  .subheader {
+  &__subheader {
     font-weight: 500;
     font-family: "Dosis", serif;
     font-optical-sizing: auto;
     font-size: 24px;
   }
 
-  .action-button {
+  &__action-button {
     margin-top: 16px;
     height: 64px;
     border-radius: 32px;
@@ -31,7 +31,7 @@
     border: none;
     cursor: pointer;
 
-    .action-button__content {
+    &__content {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -50,13 +50,13 @@
       box-shadow: inset 6.5px 6.5px 13px #9b9b9b,
                   inset -6.5px -6.5px 13px #ffffff;
       
-      .action-button__content {
+      .container__action-button__content {
         transform: scale(0.95);
       }
     }
   }
 
-  .create-note-dialog-background {
+  &__create-dialog-background {
     position: fixed;
     top: 0;
     left: 0;
@@ -69,7 +69,7 @@
     justify-content: center;
   }
 
-  .create-note-dialog {
+  &__create-dialog {
     width: 400px;
     min-height: 120px;
     background-color: #d9d9d9;
@@ -78,155 +78,159 @@
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     border: 1px solid #ffffff;
 
-    .create-note-dialog__header {
+    &__header {
       font-size: 24px;
       font-weight: 600;
     }
 
-    .create-note-dialog__content {
+    &__content {
       position: relative;
       display: flex;
       flex-direction: column;
       gap: 16px;
+    }
 
-      .create-note-dialog__close-button {
-        position: absolute;
-        top: 0;
-        right: 0;
-        background: none;
+    &__close-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #ff6b6b;
+      box-shadow: 4px 4px 8px #c3c3c3, -4px -4px 8px #f5f5f5;
+      transition: all 0.3s ease;
+
+      &:hover {
+        box-shadow: 6px 6px 10px #c3c3c3, -6px -6px 10px #f5f5f5;
+      }
+
+      &:active {
+        box-shadow: inset 4px 4px 8px #e66060, 
+                    inset -4px -4px 8px #ff7676;
+      }
+
+      svg {
+        width: 20px;
+        height: 20px;
+        
+        path {
+          stroke: #ffffff;
+        }
+      }
+    }
+
+    &__form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      &__input {
+        width: 100%;
+        height: 40px;
+        border-radius: 8px;
+        background: #d4d4d4;
+        box-shadow: inset 5px 5px 10px #c3c3c3,
+        inset -5px -5px 10px #e5e5e5;
+  
+        input {
+          width: 100%;
+          height: 100%;
+          border: none;
+          outline: none;
+          background: transparent;
+          padding: 0 16px;
+          font-size: 14px;
+        }
+      }
+
+      &__button {
+        width: 100%;
+        height: 40px;
+        border-radius: 8px;
+        background: #b3c1c8;
+        box-shadow:  5px 5px 10px #acb2b6,
+                    -5px -5px 10px #e5e5e5;
         border: none;
+        outline: none;
+        font-size: 14px;
+        font-weight: 600;
         cursor: pointer;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #ff6b6b;
-        box-shadow: 4px 4px 8px #c3c3c3, -4px -4px 8px #f5f5f5;
-        transition: all 0.3s ease;
+
+        transition: background 0.2s ease;
 
         &:hover {
-          box-shadow: 6px 6px 10px #c3c3c3, -6px -6px 10px #f5f5f5;
+          background: #b3c1c8;
         }
 
         &:active {
-          box-shadow: inset 4px 4px 8px #e66060, 
-                      inset -4px -4px 8px #ff7676;
-        }
-
-        svg {
-          width: 20px;
-          height: 20px;
-          
-          path {
-            stroke: #ffffff;
-          }
+          background: #b3c1c8;
+          box-shadow: inset 5px 5px 10px #acb2b6,
+                      inset -5px -5px 10px #bec6ca;
         }
       }
 
-      .create-note-dialog__form-content {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-
-        .card__form_input {
-          width: 100%;
-          height: 40px;
-          border-radius: 8px;
-          background: #d4d4d4;
-          box-shadow: inset 5px 5px 10px #c3c3c3,
-          inset -5px -5px 10px #e5e5e5;
-    
-          input {
-            width: 100%;
-            height: 100%;
-            border: none;
-            outline: none;
-            background: transparent;
-            padding: 0 16px;
-            font-size: 14px;
-          }
-        }
-
-        .card__form_button {
-          width: 100%;
-          height: 40px;
-          border-radius: 8px;
-          background: #b3c1c8;
-          box-shadow:  5px 5px 10px #acb2b6,
-                      -5px -5px 10px #e5e5e5;
-          border: none;
-          outline: none;
-          font-size: 14px;
-          font-weight: 600;
-          cursor: pointer;
-
-          transition: background 0.2s ease;
-
-          &:hover {
-            background: #b3c1c8;
-          }
-
-          &:active {
-            background: #b3c1c8;
-            box-shadow: inset 5px 5px 10px #acb2b6,
-                        inset -5px -5px 10px #bec6ca;
-          }
-        }
-
-        .card__form_error {
-          width: 100%;
-          color: #df1947;
-          font-size: 16px;
-          font-weight: 600;
-          text-align: center;
-        }
+      &__error {
+        width: 100%;
+        color: #df1947;
+        font-size: 16px;
+        font-weight: 600;
+        text-align: center;
       }
     }
   }
 
-  h1 {
-    font-size: 36px;
-    font-weight: 600;
-    margin-bottom: 24px;
-    text-align: center;
-  }
-
-  .notes-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    justify-content: center;
+  &__notes-section {
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 24px;
-  }
 
-  .note-card {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 16px;
-    width: 280px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    }
-
-    h3 {
-      font-size: 20px;
+    &__header {
+      font-size: 36px;
       font-weight: 600;
-      margin-bottom: 8px;
-      color: #333;
+      margin-bottom: 24px;
+      text-align: center;
     }
 
-    p {
-      font-size: 16px;
-      color: #666;
-      line-height: 1.5;
+    &__grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+
+      &__item {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 16px;
+        width: 280px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        &__title {
+          font-size: 20px;
+          font-weight: 600;
+          margin-bottom: 8px;
+          color: #333;
+        }
+
+        &__content {
+          font-size: 16px;
+          color: #666;
+          line-height: 1.5;
+        }
+      }
     }
   }
 }
