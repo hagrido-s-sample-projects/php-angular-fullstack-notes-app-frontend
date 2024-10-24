@@ -1,16 +1,29 @@
 <main>
   <div class="container">
-    <div class="header">You don't have any notes yet.</div>
-    <div class="subheader">Create a new note to get started.</div>
-    <button class="action-button" (click)="showCreateNoteDialog()">
-      <div class="action-button__content">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M16 5.33333V26.6667" stroke="black" stroke-width="2.66667" stroke-linecap="round"/>
-          <path d="M5.33333 16H26.6667" stroke="black" stroke-width="2.66667" stroke-linecap="round"/>
-        </svg>
-        <span>New Note</span>
+    <ng-container *ngIf="(notes$ | async) as notes">
+      <div *ngIf="notes.length === 0">
+        <div class="header">You don't have any notes yet.</div>
+        <div class="subheader">Create a new note to get started.</div>
+        <button class="action-button" (click)="showCreateNoteDialog()">
+          <div class="action-button__content">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 5.33333V26.6667" stroke="black" stroke-width="2.66667" stroke-linecap="round"/>
+              <path d="M5.33333 16H26.6667" stroke="black" stroke-width="2.66667" stroke-linecap="round"/>
+            </svg>
+            <span>New Note</span>
+          </div>
+        </button>
       </div>
-    </button>
+      <div *ngIf="notes.length > 0">
+        <h1>Your Notes</h1>
+        <div class="notes-container">
+          <div *ngFor="let note of notes" class="note-card">
+            <h3>{{ note.title }}</h3>
+            <p>{{ note.content }}</p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
     <div class="create-note-dialog-background" *ngIf="isCreateDialogOpen">
       <div class="create-note-dialog">
         <div class="create-note-dialog__content">

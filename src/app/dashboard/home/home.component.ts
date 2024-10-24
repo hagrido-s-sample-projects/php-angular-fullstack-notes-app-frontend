@@ -1,24 +1,37 @@
-import { Component, inject } from '@angular/core';
-import { NgIf } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import * as NoteActions from '../../store/note/note.actions';
-import { selectAllNotes } from '../../store/note/note.selector';
+import { Observable } from 'rxjs';
+import * as NoteSelectors from '../../store/note/note.selectors';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgIf, FormsModule],
+  imports: [NgIf, NgFor, FormsModule, AsyncPipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
-  private store = inject(Store);
-  
+export class HomeComponent implements OnInit {
+  notes$: Observable<any[]>;
+
   isCreateDialogOpen = false;
   noteTitle: string = '';
   errorMessage: string | null = null;
-  notes$ = this.store.select(selectAllNotes);
+
+  constructor(private store: Store) {
+    this.notes$ = this.store.select(NoteSelectors.selectAllNotes);
+  }
+
+  ngOnInit() {
+    this.loadNotes();
+    this.notes$.subscribe(notes => console.log('Notes from store:', notes));
+  }
+
+  loadNotes() {
+    this.store.dispatch(NoteActions.getNotes());
+  }
 
   showCreateNoteDialog() {
     this.isCreateDialogOpen = true;
