@@ -141,4 +141,14 @@ export class AuthEffects {
         ))
     )
   );
+
+  validateTokenSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.validateTokenSuccess),
+      tap(() => {
+        this.router.navigate(['/dashboard']);
+      })
+    ),
+    { dispatch: false }
+  );
 }

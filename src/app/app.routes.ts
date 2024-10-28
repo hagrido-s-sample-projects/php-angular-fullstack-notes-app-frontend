@@ -4,17 +4,29 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { DashboardLayoutComponent } from './dashboard/dashboard-layout.component';
 import { HomeComponent as DashboardHomeComponent } from './dashboard/home/home.component';
-import { AuthGuard } from './guards/auth.guard';
-import { NonAuthGuard } from './guards/non-auth.guard';
+import { authGuard } from './guards/auth.guard';
+import { nonAuthGuard } from './guards/non-auth.guard';
 
 export const routes: Routes = [
-  { path: '', component: HomepageComponent, canActivate: [NonAuthGuard] },
-  { path: 'login', component: LoginComponent, canActivate: [NonAuthGuard] },
-  { path: 'register', component: RegisterComponent, canActivate: [NonAuthGuard] },
+  { 
+    path: '', 
+    component: HomepageComponent,
+    canActivate: [nonAuthGuard]
+  },
+  { 
+    path: 'login', 
+    component: LoginComponent,
+    canActivate: [nonAuthGuard]
+  },
+  { 
+    path: 'register', 
+    component: RegisterComponent,
+    canActivate: [nonAuthGuard]
+  },
   {
     path: 'dashboard',
     component: DashboardLayoutComponent,
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
     children: [
       { path: '', component: DashboardHomeComponent },
       // TODO: Add other dashboard routes here
