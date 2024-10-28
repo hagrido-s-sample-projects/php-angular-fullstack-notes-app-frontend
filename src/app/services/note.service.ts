@@ -34,10 +34,10 @@ export class NoteService {
     const accessToken = localStorage.getItem('access_token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
 
-    return this.http.get<any>(`${this.apiUrl}/api/note`, { headers })
+    return this.http.get<any>(`${this.apiUrl}/api/notes`, { headers })
       .pipe(
         map(response => {
-          return { status: 'SUCCESS', notes: response.notes };
+          return { status: 'SUCCESS', notes: response };
         }),
         catchError(error => {
           return of({ status: 'ERROR', error: error.error?.error || 'Internal server error, please try again later' });
