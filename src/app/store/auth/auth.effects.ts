@@ -96,19 +96,49 @@ export class AuthEffects {
     { dispatch: false }
   );
 
-  initializeAuth$ = createEffect(() =>
+  initializeAuth$ = createEffect(() => 
     this.actions$.pipe(
       ofType(AuthActions.initializeAuth),
+      tap(() => console.log('🔄 Initializing auth...')),
       map(() => {
         if (isPlatformBrowser(this.platformId)) {
+          console.log('🌐 Running in browser environment');
           const accessToken = localStorage.getItem('access_token');
           const refreshToken = localStorage.getItem('refresh_token');
+          
           if (accessToken && refreshToken) {
-            return AuthActions.setTokens({ accessToken, refreshToken });
+            console.log('🔑 Tokens found, validating...');
+            return AuthActions.validateToken();
           }
+          console.log('❌ No tokens found in localStorage');
+        } else {
+          console.log('🖥️ Running in server environment');
         }
-        return AuthActions.logout();
+        return AuthActions.validateTokenFailure({ 
+          error: { status: 'NO_TOKENS', message: 'No tokens found' } 
+        });
       })
+    )
+  );
+
+  validateToken$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.validateToken),
+      tap(() => console.log('🔍 Validating token...')),
+      exhaustMap(() => this.authService.validateToken()
+        .pipe(
+          tap(response => console.log('✅ Token validation response:', response)),
+          map(() => {
+            console.log('✨ Token validation successful');
+            return AuthActions.validateTokenSuccess();
+          }),
+          catchError((error) => {
+            console.error('❌ Token validation failed:', error);
+            return of(AuthActions.validateTokenFailure({ 
+              error: { status: error.error.status, message: error.error.message } 
+            }));
+          })
+        ))
     )
   );
 }

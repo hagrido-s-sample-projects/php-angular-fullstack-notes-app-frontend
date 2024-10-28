@@ -15,6 +15,8 @@ export class AuthService {
       .pipe(
         map(response => {
           if (response.status === 200 && response.body?.status === 'SUCCESS') {
+            localStorage.setItem('access_token', response.body.access_token);
+            localStorage.setItem('refresh_token', response.body.refresh_token);
             return { 
               status: 'SUCCESS', 
               access_token: response.body.access_token,
@@ -79,5 +81,14 @@ export class AuthService {
       accessToken: localStorage.getItem('access_token'),
       refreshToken: localStorage.getItem('refresh_token')
     };
+  }
+
+  validateToken(): Observable<any> {
+    const accessToken = localStorage.getItem('access_token');
+    return this.http.post<any>(`${this.apiUrl}/api/auth/validate`, {}, {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${accessToken}`
+      })
+    });
   }
 }
