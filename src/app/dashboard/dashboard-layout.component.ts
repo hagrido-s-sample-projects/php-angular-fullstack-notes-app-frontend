@@ -1,7 +1,8 @@
 import { Component, ElementRef, HostListener } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-
+import { Store } from '@ngrx/store';
+import * as AuthActions from '../store/auth/auth.actions';
 @Component({
   selector: 'app-dashboard-layout',
   standalone: true,
@@ -12,7 +13,7 @@ import { RouterOutlet } from '@angular/router';
 export class DashboardLayoutComponent {
   isMenuOpen = false;
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef, private store: Store) {}
 
   @HostListener('document:click', ['$event'])
   clickOutside(event: Event) {
@@ -52,7 +53,7 @@ export class DashboardLayoutComponent {
   }
 
   onLogoutClick() {
-    console.log('Logout clicked');
+    this.store.dispatch(AuthActions.logout());
     this.closeMenu();
   }
 }

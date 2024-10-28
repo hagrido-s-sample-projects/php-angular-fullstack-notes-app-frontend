@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, Observable, of } from 'rxjs';
 
 @Injectable({
@@ -49,7 +49,24 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    return this.http.post(`${this.apiUrl}/api/auth/logout`, {});
+    const accessToken = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
+
+    return this.http.post<any>(`${this.apiUrl}/api/auth/logout`, {}, { headers })
+      .pipe(
+        map(response => {
+          if (response.status === 200 && response.body?.status === 'SUCCESS') {
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('refresh_token');
+            return { status: 'SUCCESS' };
+          } else {
+            return { status: 'ERROR', error: response.body?.error || 'Internal server error, please try again later' };
+          }
+        }),
+        catchError(error => {
+          return of({ status: 'ERROR', error: error.error?.error || 'Internal server error, please try again later' });
+        })
+      );
   }
 
   setTokens(accessToken: string, refreshToken: string): void {
@@ -62,10 +79,5 @@ export class AuthService {
       accessToken: localStorage.getItem('access_token'),
       refreshToken: localStorage.getItem('refresh_token')
     };
-  }
-
-  clearTokens(): void {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
   }
 }
