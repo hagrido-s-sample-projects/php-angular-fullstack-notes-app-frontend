@@ -56,4 +56,16 @@ export class NoteService {
         }),
       );
   }
+
+  updateNote(id: string, title: string, content: string): Observable<{status: string, note?: any, error?: string}> {
+    const accessToken = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
+
+    return this.http.put<any>(`${this.apiUrl}/api/note/${id}`, { title, content }, { headers })
+      .pipe(
+        map(response => {
+          return { status: 'SUCCESS', note: response.note };
+        }),
+      );
+  }
 }

@@ -17,3 +17,7 @@ export const getNoteSuccess = createAction('[Note] Get Note Success', props<{ no
 export const getNoteFailure = createAction('[Note] Get Note Failure', props<{ error: string }>());
 
 export const clearOpenedNote = createAction('[Note] Clear Opened Note');
+
+export const updateNote = createAction('[Note] Update Note', props<{ id: string, title: string, content: string }>());
+export const updateNoteSuccess = createAction('[Note] Update Note Success', props<{ note: Note }>());
+export const updateNoteFailure = createAction('[Note] Update Note Failure', props<{ error: string }>());

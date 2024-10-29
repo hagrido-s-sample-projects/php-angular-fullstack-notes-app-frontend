@@ -34,5 +34,9 @@ export const noteReducer = createReducer(
   on(NoteActions.clearOpenedNote, state => ({
     ...state,
     openedNote: null
+  })),
+  on(NoteActions.updateNoteSuccess, (state, { note }) => ({
+    ...state,
+    openedNote: note
   }))
 );
