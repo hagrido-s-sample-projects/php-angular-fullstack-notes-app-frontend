@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as NoteActions from '../store/note/note.actions';
@@ -23,6 +23,11 @@ export class NoteComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, private store: Store) {}
 
+  @HostListener('window:beforeunload', ['$event'])
+  unloadHandler() {
+    this.updateNote();
+  }
+
   ngOnInit(): void {
     const paramsSub = this.route.paramMap.subscribe(params => {
       this.noteId = params.get('id');
@@ -44,12 +49,13 @@ export class NoteComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.updateNote();
     this.subscriptions.forEach(sub => sub.unsubscribe());
     this.store.dispatch(NoteActions.clearOpenedNote());
   }
 
   updateNote(): void {
-    if (this.noteId) {
+    if (this.noteId && !this.isLoading) {
       this.isLoading = true;
       this.store.dispatch(NoteActions.updateNote({ id: this.noteId, title: this.title, content: this.content }));
       const updateSub = this.store.select(selectOpenedNote).subscribe(note => {
