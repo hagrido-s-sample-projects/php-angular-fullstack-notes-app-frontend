@@ -1,0 +1,58 @@
+<main>
+  <div class="container">
+    <ng-container *ngIf="(notes$ | async) as notes">
+      <div *ngIf="notes.length === 0">
+        <div class="container__header">You don't have any notes yet.</div>
+        <div class="container__subheader">Create a new note to get started.</div>
+        <button class="container__action-button" (click)="showCreateNoteDialog()">
+          <div class="container__action-button__content">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 5.33333V26.6667" stroke="black" stroke-width="2.66667" stroke-linecap="round"/>
+              <path d="M5.33333 16H26.6667" stroke="black" stroke-width="2.66667" stroke-linecap="round"/>
+            </svg>
+            <span>New Note</span>
+          </div>
+        </button>
+      </div>
+      <div *ngIf="notes.length > 0" class="container__notes-section">
+        <div class="container__notes-section__header">Your Notes</div>
+        <div class="container__notes-section__grid__item container__notes-section__grid__item--new" (click)="showCreateNoteDialog()">
+          <div class="container__notes-section__grid__item__title container__notes-section__grid__item__title--new">
+            Add New Note
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 5.33333V26.6667" stroke="black" stroke-width="2.66667" stroke-linecap="round"/>
+              <path d="M5.33333 16H26.6667" stroke="black" stroke-width="2.66667" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="container__notes-section__grid">
+          <div *ngFor="let note of notes" class="container__notes-section__grid__item">
+            <div class="container__notes-section__grid__item__title">{{ note.title }}</div>
+            <div class="container__notes-section__grid__item__underline"></div>
+            <p class="container__notes-section__grid__item__content">{{ note.content === '' ? 'No content' : note.content }}</p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <div class="container__create-dialog-background" *ngIf="isCreateDialogOpen">
+      <div class="container__create-dialog">
+        <div class="container__create-dialog__content">
+          <button class="container__create-dialog__close-button" (click)="closeCreateDialog()">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 12L12 20" stroke="black" stroke-width="2.66667" stroke-linecap="round"/>
+              <path d="M12 12L20 20" stroke="black" stroke-width="2.66667" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div class="container__create-dialog__header">Create Note</div>
+          <div class="container__create-dialog__form">
+            <div class="container__create-dialog__form__input">
+              <input type="text" [(ngModel)]="noteTitle" placeholder="Note Title (optional)" required />
+            </div>
+            <button class="container__create-dialog__form__button" (click)="createNote()">Create Note</button>
+            <div class="container__create-dialog__form__error" *ngIf="errorMessage">{{ errorMessage }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

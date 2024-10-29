@@ -43,5 +43,18 @@ export const authReducer = createReducer(
   on(AuthActions.registerFailure, (state, { error }) => ({
     ...state,
     error,
+  })),
+  // Add these new handlers
+  on(AuthActions.validateTokenSuccess, (state) => ({
+    ...state,
+    isAuthenticated: true,
+    error: null
+  })),
+  on(AuthActions.validateTokenFailure, (state, { error }) => ({
+    ...state,
+    isAuthenticated: false,
+    accessToken: null,
+    refreshToken: null,
+    error,
   }))
 );

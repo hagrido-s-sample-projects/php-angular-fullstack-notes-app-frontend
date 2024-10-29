@@ -2,13 +2,34 @@ import { Routes } from '@angular/router';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { AuthGuard } from './guards/auth.guard';
-import { NonAuthGuard } from './guards/non-auth.guard';
+import { DashboardLayoutComponent } from './dashboard/dashboard-layout.component';
+import { HomeComponent as DashboardHomeComponent } from './dashboard/home/home.component';
+import { authGuard } from './guards/auth.guard';
+import { nonAuthGuard } from './guards/non-auth.guard';
 
 export const routes: Routes = [
-  { path: '', component: HomepageComponent, canActivate: [NonAuthGuard] },
-  { path: 'login', component: LoginComponent, canActivate: [NonAuthGuard] },
-  { path: 'register', component: RegisterComponent, canActivate: [NonAuthGuard] },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { 
+    path: '', 
+    component: HomepageComponent,
+    canActivate: [nonAuthGuard]
+  },
+  { 
+    path: 'login', 
+    component: LoginComponent,
+    canActivate: [nonAuthGuard]
+  },
+  { 
+    path: 'register', 
+    component: RegisterComponent,
+    canActivate: [nonAuthGuard]
+  },
+  {
+    path: 'dashboard',
+    component: DashboardLayoutComponent,
+    canActivate: [authGuard],
+    children: [
+      { path: '', component: DashboardHomeComponent },
+      // TODO: Add other dashboard routes here
+    ]
+  },
 ];

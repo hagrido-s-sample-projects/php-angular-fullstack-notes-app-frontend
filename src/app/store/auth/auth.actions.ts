@@ -9,6 +9,14 @@ export const registerSuccess = createAction('[Auth] Register Success');
 export const registerFailure = createAction('[Auth] Register Failure', props<{ error: { status: string; message: string } }>());
 
 export const logout = createAction('[Auth] Logout');
+export const logoutSuccess = createAction('[Auth] Logout Success');
+export const logoutFailure = createAction('[Auth] Logout Failure', props<{ error: { status: string; message: string } }>());
 
 export const initializeAuth = createAction('[Auth] Initialize Auth');
 export const setTokens = createAction('[Auth] Set Tokens', props<{ accessToken: string, refreshToken: string }>());
+export const validateToken = createAction('[Auth] Validate Token');
+export const validateTokenSuccess = createAction('[Auth] Validate Token Success');
+export const validateTokenFailure = createAction(
+  '[Auth] Validate Token Failure',
+  props<{ error: { status: string; message: string } }>()
+);

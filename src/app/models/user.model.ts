@@ -1,8 +1,8 @@
-
 export interface User {
-  id: number;
+  id: number | null;
   email: string;
   username: string;
-  password: string;
   createdAt: Date;
-} 
+  sessions?: number[]; // Array of session IDs
+  notes?: number[]; // Array of note IDs
+}

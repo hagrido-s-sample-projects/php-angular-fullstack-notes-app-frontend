@@ -1,0 +1,22 @@
+<main>
+  <div class="container">
+    <div class="header">
+      <span class="header__title">
+        <span class="header__title_bold">Clean</span>
+        Notes
+      </span>
+      <span class="spacer"></span>
+      <div class="menu__wrapper">
+        <button class="header__button" (click)="toggleMenu($event)">Menu</button>
+        <div class="menu__content" [ngClass]="{'menu__content_open': isMenuOpen}">
+          <button class="menu__content_button" (click)="onProfileClick()">Your Profile</button>
+          <button class="menu__content_button" (click)="onArchiveClick()">Archive</button>
+          <button class="menu__content_button" (click)="onTrashClick()">Trash</button>
+          <button class="menu__content_button" (click)="onSettingsClick()">Settings</button>
+          <button class="menu__content_button" (click)="onLogoutClick()">Logout</button>
+        </div>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+</main>
