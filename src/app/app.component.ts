@@ -9,10 +9,5 @@ import * as AuthActions from './store/auth/auth.actions';
   imports: [RouterOutlet],
   template: '<router-outlet></router-outlet>'
 })
-export class AppComponent implements OnInit {
-  constructor(private store: Store) {}
-
-  ngOnInit() {
-    this.store.dispatch(AuthActions.initializeAuth());
-  }
+export class AppComponent {
 }

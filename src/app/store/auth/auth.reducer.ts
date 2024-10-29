@@ -2,14 +2,14 @@ import { createReducer, on } from '@ngrx/store';
 import * as AuthActions from './auth.actions';
 
 export interface AuthState {
-  isAuthenticated: boolean;
+  isAuthenticated: boolean | null;
   accessToken: string | null;
   refreshToken: string | null;
   error: { status: string; message: string } | null;
 }
 
 export const initialAuthState: AuthState = {
-  isAuthenticated: false,
+  isAuthenticated: null,
   accessToken: null,
   refreshToken: null,
   error: null,
