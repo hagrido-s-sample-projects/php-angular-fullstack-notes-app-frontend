@@ -18,6 +18,8 @@ export class NoteComponent implements OnInit, OnDestroy {
   title: string = '';
   content: string = '';
   isLoading: boolean = false;
+  originalTitle: string = '';
+  originalContent: string = '';
 
   private subscriptions: Subscription[] = [];
 
@@ -39,6 +41,8 @@ export class NoteComponent implements OnInit, OnDestroy {
             console.log(note);
             this.title = note.title || '';
             this.content = note.content || '';
+            this.originalTitle = note.title || '';
+            this.originalContent = note.content || '';
           }
           this.isLoading = false;
         });
@@ -49,7 +53,9 @@ export class NoteComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.updateNote();
+    if (this.title !== this.originalTitle || this.content !== this.originalContent) {
+      this.updateNote();
+    }
     this.subscriptions.forEach(sub => sub.unsubscribe());
     this.store.dispatch(NoteActions.clearOpenedNote());
   }
