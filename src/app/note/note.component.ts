@@ -94,4 +94,8 @@ export class NoteComponent implements OnInit, OnDestroy {
   openStats(): void {
     this.showStats = true;
   }
+  
+  countParagraphs(): number {
+    return this.content.split('\n').filter(line => line.trim().length > 0).length;
+  }
 }
