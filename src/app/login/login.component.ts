@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import * as AuthActions from '../store/auth/auth.actions';
-import { selectAccessToken } from '../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-login',

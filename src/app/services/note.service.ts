@@ -44,4 +44,16 @@ export class NoteService {
         })
       );
   }
+
+  getNote(id: string): Observable<{status: string, note?: any, error?: string}> {
+    const accessToken = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
+
+    return this.http.get<any>(`${this.apiUrl}/api/note/${id}`, { headers })
+      .pipe(
+        map(response => {
+          return { status: 'SUCCESS', note: response.note };
+        }),
+      );
+  }
 }

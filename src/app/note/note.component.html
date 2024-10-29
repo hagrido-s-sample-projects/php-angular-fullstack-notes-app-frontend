@@ -22,10 +22,10 @@
       </button>
     </div>
     <div class="note">
-      <input type="text" placeholder="Title" class="note__title" />
+      <input type="text" placeholder="Title" class="note__title" [(ngModel)]="title" />
       <div class="note__divider"></div>
       <div class="note__content">
-        <textarea placeholder="Write your note here..." class="note__textarea"></textarea>
+        <textarea placeholder="Write your note here..." class="note__textarea" [(ngModel)]="content"></textarea>
       </div>
     </div>
   </div>

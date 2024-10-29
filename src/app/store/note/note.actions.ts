@@ -11,3 +11,7 @@ export const createNote = createAction(
 );
 export const createNoteSuccess = createAction('[Note] Create Note Success', props<{ note: any }>());
 export const createNoteFailure = createAction('[Note] Create Note Failure');
+
+export const getNote = createAction('[Note] Get Note', props<{ id: string }>());
+export const getNoteSuccess = createAction('[Note] Get Note Success', props<{ note: Note }>());
+export const getNoteFailure = createAction('[Note] Get Note Failure', props<{ error: string }>());

@@ -44,4 +44,11 @@ export class NoteEffects {
       ))
     )
   );
+
+  getNote$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(NoteActions.getNote),
+      switchMap(({ id }) => this.noteService.getNote(id).pipe(map(response => NoteActions.getNoteSuccess({ note: response.note }))))
+    )
+  );
 }
