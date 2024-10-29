@@ -40,10 +40,7 @@ export class NoteComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Clean up subscriptions
     this.subscriptions.forEach(sub => sub.unsubscribe());
-    
-    // Clear opened note from store when component is destroyed
     this.store.dispatch(NoteActions.clearOpenedNote());
   }
 }
