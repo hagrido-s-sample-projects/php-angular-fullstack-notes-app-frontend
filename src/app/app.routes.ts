@@ -6,6 +6,7 @@ import { DashboardLayoutComponent } from './dashboard/dashboard-layout.component
 import { HomeComponent as DashboardHomeComponent } from './dashboard/home/home.component';
 import { authGuard } from './guards/auth.guard';
 import { nonAuthGuard } from './guards/non-auth.guard';
+import { NoteComponent } from './note/note.component';
 
 export const routes: Routes = [
   { 
@@ -31,5 +32,10 @@ export const routes: Routes = [
       { path: '', component: DashboardHomeComponent },
       // TODO: Add other dashboard routes here
     ]
+  },
+  {
+    path: 'note/:id',
+    component: NoteComponent,
+    canActivate: [authGuard]
   },
 ];
