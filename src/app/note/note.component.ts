@@ -6,6 +6,8 @@ import { selectOpenedNote } from '../store/note/note.selectors';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { NgIf, NgClass } from '@angular/common';
+import { Router } from '@angular/router';
+
 @Component({
   standalone: true,
   selector: 'app-note',
@@ -27,7 +29,7 @@ export class NoteComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
 
-  constructor(private route: ActivatedRoute, private store: Store) {}
+  constructor(private route: ActivatedRoute, private store: Store, private router: Router) {}
 
   @HostListener('window:beforeunload', ['$event'])
   unloadHandler() {
@@ -97,5 +99,9 @@ export class NoteComponent implements OnInit, OnDestroy {
   
   countParagraphs(): number {
     return this.content.split('\n').filter(line => line.trim().length > 0).length;
+  }
+
+  exit(): void {
+    this.router.navigate(['/dashboard']);
   }
 }
