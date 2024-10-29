@@ -5,21 +5,25 @@ import * as NoteActions from '../store/note/note.actions';
 import { selectOpenedNote } from '../store/note/note.selectors';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
-
+import { NgIf, NgClass } from '@angular/common';
 @Component({
   standalone: true,
   selector: 'app-note',
   templateUrl: './note.component.html',
   styleUrls: ['./note.component.scss'],
-  imports: [FormsModule]
+  imports: [FormsModule, NgIf, NgClass]
 })
 export class NoteComponent implements OnInit, OnDestroy {
   noteId: string | null = null;
   title: string = '';
   content: string = '';
   isLoading: boolean = false;
+  isLoadingSuccess: boolean = false;
+  showStats: boolean = false;
   originalTitle: string = '';
   originalContent: string = '';
+
+  Math = Math;
 
   private subscriptions: Subscription[] = [];
 
@@ -34,17 +38,14 @@ export class NoteComponent implements OnInit, OnDestroy {
     const paramsSub = this.route.paramMap.subscribe(params => {
       this.noteId = params.get('id');
       if (this.noteId) {
-        this.isLoading = true;
         this.store.dispatch(NoteActions.getNote({ id: this.noteId }));
         const noteSub = this.store.select(selectOpenedNote).subscribe(note => {
           if (note) {
-            console.log(note);
             this.title = note.title || '';
             this.content = note.content || '';
             this.originalTitle = note.title || '';
             this.originalContent = note.content || '';
           }
-          this.isLoading = false;
         });
         this.subscriptions.push(noteSub);
       }
@@ -68,10 +69,29 @@ export class NoteComponent implements OnInit, OnDestroy {
         if (note) {
           this.title = note.title || '';
           this.content = note.content || '';
+          this.showSuccess()
         }
-        this.isLoading = false;
       });
       this.subscriptions.push(updateSub);
     }
+  }
+
+  showSuccess(): Promise<void> {
+    this.isLoadingSuccess = true;
+    return new Promise(resolve => {
+      setTimeout(() => {
+        this.isLoadingSuccess = false;
+        this.isLoading = false;
+        resolve();
+      }, 3000);
+    });
+  }
+
+  closeStats(): void {
+    this.showStats = false;
+  }
+
+  openStats(): void {
+    this.showStats = true;
   }
 }

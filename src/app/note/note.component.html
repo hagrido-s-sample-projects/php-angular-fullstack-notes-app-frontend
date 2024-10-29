@@ -11,7 +11,7 @@
         </span>
       </button>
       <div class="toolbar__spacer"></div>
-      <button class="toolbar__button">
+      <button class="toolbar__button" (click)="openStats()">
         <span class="toolbar__button_icon">
           <svg svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"/>
@@ -26,6 +26,45 @@
       <div class="note__divider"></div>
       <div class="note__content">
         <textarea placeholder="Write your note here..." class="note__textarea" [(ngModel)]="content"></textarea>
+      </div>
+    </div>
+    <div [ngClass]="{'note__loading': true, 'note__loading_hidden': !isLoading, 'note__loading_success': isLoadingSuccess}">
+      <div class="note__loading_text">
+        {{ isLoadingSuccess ? 'Saved!' : 'Saving...' }}
+      </div>
+    </div>
+    <div class="note-stats-wrapper" *ngIf="showStats">
+      <div class="note-stats">
+        <div class="note-stats__title">Stats of your note:</div>
+        <div class="note-stats__divider"></div>
+        <div class="note-stats-list">
+          <div class="note-stats-list__item">
+            <span class="note-stats-list__item_label">Characters: </span>
+            <span class="note-stats-list__item_value">{{ content.length }}</span>
+          </div>
+          <div class="note-stats-list__item">
+            <span class="note-stats-list__item_label">Words: </span>
+            <span class="note-stats-list__item_value">{{ content.split(' ').length }}</span>
+          </div>
+          <div class="note-stats-list__item">
+            <span class="note-stats-list__item_label">Sentences: </span>
+            <span class="note-stats-list__item_value">{{ content.split('.').length }}</span>
+          </div>
+          <div class="note-stats-list__item">
+            <span class="note-stats-list__item_label">Paragraphs: </span>
+            <span class="note-stats-list__item_value">{{ content.split('\n').length }}</span>
+          </div>
+          <div class="note-stats-list__item">
+            <span class="note-stats-list__item_label">Reading time: </span>
+            <span class="note-stats-list__item_value">{{ Math.ceil(content.split(' ').length / 250) }} minute{{ Math.ceil(content.split(' ').length / 250) > 1 ? 's' : '' }}</span>
+          </div>
+        </div>
+        <div class="note-stats__divider"></div>
+        <button class="note-stats__button" (click)="closeStats()">
+          <span class="note-stats__button_icon">
+            close
+          </span>
+        </button>
       </div>
     </div>
   </div>

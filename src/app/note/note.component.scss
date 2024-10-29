@@ -113,4 +113,138 @@
       }
     }
   }
+
+  .note__loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 300px;
+    border-radius: 0px 0px 50% 50%;
+    transition: transform 0.5s ease-in-out;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -150px;
+      left: -25%;
+      width: 150%;
+      height: 100%;
+      background: #000;
+      border-radius: 0px 0px 50% 50%;
+      filter: blur(80px);
+    }
+
+    .note__loading_text {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-size: 28px;
+      font-weight: 300;
+      font-family: 'Dosis', serif;
+      font-optical-sizing: auto;
+      transition: transform 0.5s ease-in-out;
+    }
+  }
+
+  .note__loading_hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+
+    .note__loading_text {
+      transform: translate(-50%, -100%);
+    }
+  }
+
+  .note__loading_success::before {
+    background: #77d777;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .note-stats-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    background: #00000020;
+
+    .note-stats {
+      min-width: 200px;
+      max-width: 350px;
+      max-height: 450px;
+      background: #d4d4d4;
+      padding: 16px;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .note-stats__title {
+      font-size: 24px;
+      font-weight: 300;
+      font-family: 'Dosis', serif;
+      font-optical-sizing: auto;
+    }
+
+    .note-stats__divider {
+      height: 1px;
+      width: 100%;
+      background-color: #00000050;
+      margin: 8px 0;
+    }
+
+    .note-stats-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      .note-stats-list__item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 4px;
+
+        .note-stats-list__item_label {
+          font-size: 16px;
+          font-weight: 500;
+          font-family: 'Dosis', serif;
+          font-optical-sizing: auto;
+        }
+
+        .note-stats-list__item_value {
+          font-size: 16px;
+          font-weight: 650;
+          font-family: 'Dosis', serif;
+          font-optical-sizing: auto;
+        }
+      }
+    }
+
+    .note-stats__button {
+      background-color: transparent;
+      width: 100%;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 8px;
+      background: #d4d4d4;
+      box-shadow: 5px 5px 10px #c3c3c3,
+                  -5px -5px 10px #e5e5e5;
+      transition: all 0.15s ease-out;
+
+      &:active {
+        background: #d4d4d4;
+        box-shadow: inset 5px 5px 10px #c3c3c3,
+                    inset -5px -5px 10px #e5e5e5;
+      }
+    }
+  
+  }
 }
