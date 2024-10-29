@@ -102,6 +102,7 @@ export class NoteComponent implements OnInit, OnDestroy {
   }
 
   exit(): void {
+    this.updateNote();
     this.router.navigate(['/dashboard']);
   }
 }
