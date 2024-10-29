@@ -1,1 +1,32 @@
-<h1>Note {{ noteId }}</h1>
+<main>
+  <div class="container">
+    <div class="toolbar">
+      <button class="toolbar__button">
+        <span class="toolbar__button_icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+            <polyline points="17 21 17 13 7 13 7 21"/>
+            <polyline points="7 3 7 8 15 8"/>
+          </svg>
+        </span>
+      </button>
+      <div class="toolbar__spacer"></div>
+      <button class="toolbar__button">
+        <span class="toolbar__button_icon">
+          <svg svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="16" x2="12" y2="12"/>
+            <line x1="12" y1="8" x2="12.01" y2="8"/>
+          </svg>
+        </span>
+      </button>
+    </div>
+    <div class="note">
+      <input type="text" placeholder="Title" class="note__title" />
+      <div class="note__divider"></div>
+      <div class="note__content">
+        <textarea placeholder="Write your note here..." class="note__textarea"></textarea>
+      </div>
+    </div>
+  </div>
+</main>

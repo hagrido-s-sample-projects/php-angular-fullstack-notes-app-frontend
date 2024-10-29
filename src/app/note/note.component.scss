@@ -1,0 +1,116 @@
+.container {
+  position: relative;
+  height: 100%;
+
+  .toolbar {
+    height: 60px;
+    width: calc(100% - 72px);
+    background: #d4d4d4;
+    box-shadow: 13px 13px 26px #9b9b9b,
+                -13px -13px 26px #ffffff;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    margin: 16px;
+    border-radius: 16px;
+
+    .toolbar__button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 8px;
+      background: #d4d4d4;
+      box-shadow: 5px 5px 10px #c3c3c3,
+                  -5px -5px 10px #e5e5e5;
+      transition: all 0.15s ease-out;
+
+      &:active {
+        background: #d4d4d4;
+        box-shadow: inset 5px 5px 10px #c3c3c3,
+                    inset -5px -5px 10px #e5e5e5;
+      }
+
+      .toolbar__button_icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+
+    .toolbar__spacer {
+      flex: 1;
+    }
+  }
+
+  .note {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 148px);
+    height: calc(100% - 92px); /* Account for toolbar height + margins */
+    max-width: calc(100% - 32px);
+    margin: 16px;
+    padding: 16px;
+    border-radius: 16px;
+    background: linear-gradient(145deg, #e0e0e0, #c8c8c8);
+    box-shadow: 20px 20px 40px #b4b4b4,
+                -20px -20px 40px #f4f4f4;
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(0,0,0,0.02));
+      pointer-events: none;
+    }
+
+    .note__title {
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 24px;
+      font-weight: 600;
+      width: 100%;
+    }
+
+    .note__divider {
+      height: 1px;
+      width: 100%;
+      background-color: #ccc;
+      margin: 8px 0;
+    }
+
+    .note__content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      background: transparent;
+
+      textarea {
+        flex: 1;
+        border: none;
+        outline: none;
+        background: transparent;
+        font-size: 16px;
+        font-weight: 400;
+        width: 100%;
+        resize: none;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        word-break: break-all;
+        white-space: pre-wrap;
+      }
+    }
+  }
+}
