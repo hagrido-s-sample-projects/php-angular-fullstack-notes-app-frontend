@@ -26,7 +26,7 @@
           </div>
         </div>
         <div class="container__notes-section__grid">
-          <div *ngFor="let note of notes" class="container__notes-section__grid__item">
+          <div *ngFor="let note of notes" class="container__notes-section__grid__item" (click)="openNote(note.id?.toString() || '')">
             <div class="container__notes-section__grid__item__title">{{ note.title }}</div>
             <div class="container__notes-section__grid__item__underline"></div>
             <p class="container__notes-section__grid__item__content">{{ note.content === '' ? 'No content' : note.content }}</p>

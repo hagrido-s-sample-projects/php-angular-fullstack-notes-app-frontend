@@ -6,6 +6,7 @@ import * as NoteActions from '../../store/note/note.actions';
 import { Observable } from 'rxjs';
 import * as NoteSelectors from '../../store/note/note.selectors';
 import { Note } from '../../models/note.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -21,8 +22,14 @@ export class HomeComponent implements OnInit {
   noteTitle: string = '';
   errorMessage: string | null = null;
 
-  constructor(private store: Store) {
+  constructor(private store: Store, private router: Router) {
     this.notes$ = this.store.select(NoteSelectors.selectAllNotes);
+  }
+
+  openNote(id: string) {
+    if (id) {
+      this.router.navigate(['/note', id]);
+    }
   }
 
   ngOnInit() {
