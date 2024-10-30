@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as NoteActions from '../store/note/note.actions';
@@ -28,6 +28,8 @@ export class NoteComponent implements OnInit, OnDestroy {
   Math = Math;
 
   private subscriptions: Subscription[] = [];
+
+  @ViewChild('contentTextarea') contentTextarea!: ElementRef<HTMLTextAreaElement>;
 
   constructor(private route: ActivatedRoute, private store: Store, private router: Router) {}
 
@@ -61,6 +63,20 @@ export class NoteComponent implements OnInit, OnDestroy {
     }
     this.subscriptions.forEach(sub => sub.unsubscribe());
     this.store.dispatch(NoteActions.clearOpenedNote());
+  }
+
+  ngAfterViewInit(): void {
+    this.adjustTextareaHeight();
+  }
+
+  onContentInput(): void {
+    this.adjustTextareaHeight();
+  }
+
+  private adjustTextareaHeight(): void {
+    const textarea = this.contentTextarea.nativeElement;
+    textarea.style.height = 'auto';
+    textarea.style.height = `${textarea.scrollHeight}px`;
   }
 
   updateNote(): void {

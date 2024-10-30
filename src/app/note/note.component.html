@@ -33,7 +33,7 @@
       <input type="text" placeholder="Title" class="note__title" [(ngModel)]="title" />
       <div class="note__divider"></div>
       <div class="note__content">
-        <textarea placeholder="Write your note here..." class="note__textarea" [(ngModel)]="content"></textarea>
+        <textarea #contentTextarea [(ngModel)]="content" (input)="onContentInput()"></textarea>
       </div>
     </div>
     <div [ngClass]="{'note__loading': true, 'note__loading_hidden': !isLoading, 'note__loading_success': isLoadingSuccess}">
