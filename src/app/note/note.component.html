@@ -38,6 +38,10 @@
     </div>
     <div class="note">
       <input type="text" placeholder="Title" class="note__title" [(ngModel)]="title" />
+      <div class="note__info">
+        <span>created: {{ createdAt ? (isLessThan24h(createdAt) ? getTimeAgo(createdAt) : createdAt | date:'dd.MM.yyyy HH:mm') : '' }}</span>
+        <span>updated: {{ updatedAt ? (isLessThan24h(updatedAt) ? getTimeAgo(updatedAt) : updatedAt | date:'dd.MM.yyyy HH:mm') : '' }}</span>
+      </div>
       <div class="note__divider"></div>
       <div class="note__content">
         <textarea #contentTextarea [(ngModel)]="content" (input)="onContentInput()"></textarea>

@@ -5,7 +5,7 @@ import * as NoteActions from '../store/note/note.actions';
 import { selectOpenedNote } from '../store/note/note.selectors';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { NgIf, NgClass } from '@angular/common';
+import { NgIf, NgClass, DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,20 +13,26 @@ import { Router } from '@angular/router';
   selector: 'app-note',
   templateUrl: './note.component.html',
   styleUrls: ['./note.component.scss'],
-  imports: [FormsModule, NgIf, NgClass]
+  imports: [FormsModule, NgIf, NgClass, DatePipe]
 })
 export class NoteComponent implements OnInit, OnDestroy {
   noteId: string | null = null;
   title: string = '';
   content: string = '';
+  createdAt: Date | null = null;
+  updatedAt: Date | null = null;
+
   isLoading: boolean = false;
   isLoadingSuccess: boolean = false;
-  showStats: boolean = false;
   isMenuOpen: boolean = false;
+
+  showStats: boolean = false;
+
   originalTitle: string = '';
   originalContent: string = '';
 
   Math = Math;
+  
 
   private subscriptions: Subscription[] = [];
 
@@ -57,6 +63,8 @@ export class NoteComponent implements OnInit, OnDestroy {
             this.content = note.content || '';
             this.originalTitle = note.title || '';
             this.originalContent = note.content || '';
+            this.createdAt = note.createdAt ? new Date(note.createdAt + 'Z') : null;
+            this.updatedAt = note.updatedAt ? new Date(note.updatedAt + 'Z') : null;
           }
         });
         this.subscriptions.push(noteSub);
@@ -111,6 +119,30 @@ export class NoteComponent implements OnInit, OnDestroy {
         resolve();
       }, 3000);
     });
+  }
+
+  isLessThan24h(date: Date | string): boolean {
+    const dateObj = new Date(date);
+    return dateObj.getTime() > new Date().getTime() - 24 * 60 * 60 * 1000;
+  }
+
+  getTimeAgo(date: Date | string): string {
+    const now = new Date();
+    const dateObj = new Date(date);
+    const diffTime = Math.abs(now.getTime() - dateObj.getTime());
+    const diffMinutes = Math.floor(diffTime / (1000 * 60));
+    
+    if (diffMinutes < 1) {
+      return 'just now';
+    } else if (diffMinutes < 60) {
+      return `${diffMinutes} minute${diffMinutes === 1 ? '' : 's'} ago`;
+    } else if (diffMinutes < 1440) { // Less than 24 hours
+      const diffHours = Math.floor(diffMinutes / 60);
+      return `${diffHours} hour${diffHours === 1 ? '' : 's'} ago`;
+    } else {
+      const diffDays = Math.floor(diffMinutes / 1440);
+      return `${diffDays} day${diffDays === 1 ? '' : 's'} ago`;
+    }
   }
 
   closeStats(): void {
