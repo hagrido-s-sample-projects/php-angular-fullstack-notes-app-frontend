@@ -46,6 +46,53 @@
     .toolbar__spacer {
       flex: 1;
     }
+
+    .menu__wrapper {
+      position: relative;
+    }
+
+    .menu__content {
+      display: none;
+
+      &_open {
+        display: flex;
+        min-width: 150px;
+        flex-direction: column;
+        gap: 8px;
+        position: absolute;
+        padding: 16px;
+        top: 60px;
+        right: -16px;
+        width: 100%;
+        background: rgba(212, 212, 212, 0.8);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+        border-radius: 16px;
+      }
+
+      .menu__content_button {
+        background-color: transparent;
+        border: 1px solid #b8b8b875;
+        cursor: pointer;
+        font-size: 18px;
+        padding: 8px 16px;
+        border-radius: 8px;
+        background: #d4d4d4;
+        transition: all 0.15s ease-out;
+
+        &:hover {
+          border-color: transparent;
+          box-shadow: 2px 2px 5px #c3c3c3,
+                      -2px -2px 5px #e5e5e5;
+        }
+
+        &:active {
+          border-color: transparent;
+          box-shadow: inset 2px 2px 5px #c3c3c3,
+                      inset -2px -2px 5px #e5e5e5;
+        }
+      }
+    }
   }
 
   .note {

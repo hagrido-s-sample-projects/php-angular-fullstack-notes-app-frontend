@@ -19,15 +19,22 @@
         </span>
       </button>
       <div class="toolbar__spacer"></div>
-      <button class="toolbar__button" (click)="openStats()">
-        <span class="toolbar__button_icon">
-          <svg svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="12" y1="16" x2="12" y2="12"/>
-            <line x1="12" y1="8" x2="12.01" y2="8"/>
-          </svg>
-        </span>
-      </button>
+      <div class="menu__wrapper">
+        <button class="toolbar__button" (click)="toggleMenu($event)">
+          <span class="toolbar__button_icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="1"></circle>
+              <circle cx="19" cy="12" r="1"></circle>
+              <circle cx="5" cy="12" r="1"></circle>
+            </svg>
+          </span>
+        </button>
+        <div class="menu__content" [ngClass]="{'menu__content_open': isMenuOpen}">
+          <button class="menu__content_button" (click)="openStats()">Note Stats</button>
+          <button class="menu__content_button" (click)="archiveNote()">Archive Note</button>
+          <button class="menu__content_button" (click)="deleteNote()" style="color: #ff5555;">Delete Note</button>
+        </div>
+      </div>
     </div>
     <div class="note">
       <input type="text" placeholder="Title" class="note__title" [(ngModel)]="title" />

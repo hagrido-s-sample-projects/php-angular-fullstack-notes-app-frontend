@@ -22,6 +22,7 @@ export class NoteComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   isLoadingSuccess: boolean = false;
   showStats: boolean = false;
+  isMenuOpen: boolean = false;
   originalTitle: string = '';
   originalContent: string = '';
 
@@ -36,6 +37,13 @@ export class NoteComponent implements OnInit, OnDestroy {
   @HostListener('window:beforeunload', ['$event'])
   unloadHandler() {
     this.updateNote();
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickOutside(event: Event) {
+    if (this.isMenuOpen && !(event.target as HTMLElement).closest('.menu__wrapper')) {
+      this.isMenuOpen = false;
+    }
   }
 
   ngOnInit(): void {
@@ -111,6 +119,7 @@ export class NoteComponent implements OnInit, OnDestroy {
 
   openStats(): void {
     this.showStats = true;
+    this.isMenuOpen = false;
   }
   
   countParagraphs(): number {
@@ -119,6 +128,21 @@ export class NoteComponent implements OnInit, OnDestroy {
 
   exit(): void {
     this.updateNote();
+    this.router.navigate(['/dashboard']);
+  }
+
+  toggleMenu(event: Event): void {
+    event.stopPropagation();
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  archiveNote(): void {
+    // TODO: Implement archive functionality
+    this.router.navigate(['/dashboard']);
+  }
+
+  deleteNote(): void {
+    // TODO: Implement delete functionality
     this.router.navigate(['/dashboard']);
   }
 }
