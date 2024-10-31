@@ -42,7 +42,9 @@ export class NoteComponent implements OnInit, OnDestroy {
 
   @HostListener('window:beforeunload', ['$event'])
   unloadHandler() {
-    this.updateNote();
+    if (this.hasChanges()) {
+      this.updateNote();
+    }
   }
 
   @HostListener('document:click', ['$event'])
@@ -74,7 +76,7 @@ export class NoteComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.title !== this.originalTitle || this.content !== this.originalContent) {
+    if (this.hasChanges()) {
       this.updateNote();
     }
     this.subscriptions.forEach(sub => sub.unsubscribe());
@@ -93,6 +95,10 @@ export class NoteComponent implements OnInit, OnDestroy {
     const textarea = this.contentTextarea.nativeElement;
     textarea.style.height = 'auto';
     textarea.style.height = `${textarea.scrollHeight}px`;
+  }
+
+  private hasChanges(): boolean {
+    return this.title !== this.originalTitle || this.content !== this.originalContent;
   }
 
   updateNote(): void {
@@ -159,7 +165,9 @@ export class NoteComponent implements OnInit, OnDestroy {
   }
 
   exit(): void {
-    this.updateNote();
+    if (this.hasChanges()) {
+      this.updateNote();
+    }
     this.router.navigate(['/dashboard']);
   }
 
