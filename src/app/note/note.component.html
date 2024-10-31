@@ -1,8 +1,8 @@
-<main>
-  <div class="container">
-    <div class="toolbar">
-      <button class="toolbar__button" (click)="updateNote()" [disabled]="isLoading">
-        <span class="toolbar__button_icon">
+<main class="note">
+  <div class="note__container">
+    <header class="note__toolbar">
+      <button class="note__toolbar-btn" (click)="updateNote()" [disabled]="isLoading">
+        <span class="note__toolbar-btn-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
             <polyline points="17 21 17 13 7 13 7 21"/>
@@ -10,18 +10,18 @@
           </svg>
         </span>
       </button>
-      <button class="toolbar__button" (click)="exit()">
-        <span class="toolbar__button_icon">
+      <button class="note__toolbar-btn" (click)="exit()">
+        <span class="note__toolbar-btn-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
             <polyline points="9 22 9 12 15 12 15 22"/>
           </svg>
         </span>
       </button>
-      <div class="toolbar__spacer"></div>
-      <div class="menu__wrapper">
-        <button class="toolbar__button" (click)="toggleMenu($event)">
-          <span class="toolbar__button_icon">
+      <div class="note__spacer"></div>
+      <div class="note__menu">
+        <button class="note__toolbar-btn" (click)="toggleMenu($event)">
+          <span class="note__toolbar-btn-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="1"></circle>
               <circle cx="19" cy="12" r="1"></circle>
@@ -29,60 +29,61 @@
             </svg>
           </span>
         </button>
-        <div class="menu__content" [ngClass]="{'menu__content_open': isMenuOpen}">
-          <button class="menu__content_button" (click)="openStats()">Note Stats</button>
-          <button class="menu__content_button" (click)="archiveNote()">Archive Note</button>
-          <button class="menu__content_button" (click)="deleteNote()" style="color: #ff5555;">Delete Note</button>
+        <div class="note__menu-dropdown" [ngClass]="{'note__menu-dropdown--open': isMenuOpen}">
+          <button class="note__menu-item" (click)="openStats()">Note Stats</button>
+          <button class="note__menu-item" (click)="archiveNote()">Archive Note</button>
+          <button class="note__menu-item note__menu-item--danger" (click)="deleteNote()">Delete Note</button>
         </div>
       </div>
-    </div>
-    <div class="note">
+    </header>
+
+    <div class="note__content">
       <input type="text" placeholder="Title" class="note__title" [(ngModel)]="title" />
-      <div class="note__info">
+      <div class="note__metadata">
         <span>created: {{ createdAt ? (isLessThan24h(createdAt) ? getTimeAgo(createdAt) : createdAt | date:'dd.MM.yyyy HH:mm') : '' }}</span>
         <span>updated: {{ updatedAt ? (isLessThan24h(updatedAt) ? getTimeAgo(updatedAt) : updatedAt | date:'dd.MM.yyyy HH:mm') : '' }}</span>
       </div>
       <div class="note__divider"></div>
-      <div class="note__content">
+      <div class="note__editor">
         <textarea #contentTextarea [(ngModel)]="content" (input)="onContentInput()"></textarea>
       </div>
     </div>
-    <div [ngClass]="{'note__loading': true, 'note__loading_hidden': !isLoading, 'note__loading_success': isLoadingSuccess}">
-      <div class="note__loading_text">
+
+    <div class="note__loading" [ngClass]="{'note__loading--hidden': !isLoading, 'note__loading--success': isLoadingSuccess}">
+      <div class="note__loading-text">
         {{ isLoadingSuccess ? 'Saved!' : 'Saving...' }}
       </div>
     </div>
-    <div class="note-stats-wrapper" *ngIf="showStats">
-      <div class="note-stats">
-        <div class="note-stats__title">Stats of your note:</div>
-        <div class="note-stats__divider"></div>
-        <div class="note-stats-list">
-          <div class="note-stats-list__item">
-            <span class="note-stats-list__item_label">Characters: </span>
-            <span class="note-stats-list__item_value">{{ content.length }}</span>
+
+    <div class="note__stats-overlay" *ngIf="showStats">
+      <div class="note__stats">
+        <h2 class="note__stats-title">Stats of your note:</h2>
+        <div class="note__stats-divider"></div>
+        <div class="note__stats-list">
+          <div class="note__stats-item">
+            <span class="note__stats-label">Characters: </span>
+            <span class="note__stats-value">{{ content.length }}</span>
           </div>
-          <div class="note-stats-list__item">
-            <span class="note-stats-list__item_label">Words: </span>
-            <span class="note-stats-list__item_value">{{ content.split(' ').length }}</span>
+          <div class="note__stats-item">
+            <span class="note__stats-label">Words: </span>
+            <span class="note__stats-value">{{ content.split(' ').length }}</span>
           </div>
-          <div class="note-stats-list__item">
-            <span class="note-stats-list__item_label">Sentences: </span>
-            <span class="note-stats-list__item_value">{{ content.split('.').length }}</span>
+          <div class="note__stats-item">
+            <span class="note__stats-label">Sentences: </span>
+            <span class="note__stats-value">{{ content.split('.').length }}</span>
           </div>
-          <div class="note-stats-list__item">
-            <span class="note-stats-list__item_label">Paragraphs: </span>
-            <span class="note-stats-list__item_value">{{ countParagraphs() }}</span>
+          <div class="note__stats-item">
+            <span class="note__stats-label">Paragraphs: </span>
+            <span class="note__stats-value">{{ countParagraphs() }}</span>
           </div>
-          <div class="note-stats-list__item">
-            <span class="note-stats-list__item_label">Reading time: </span>
-            <span class="note-stats-list__item_value">{{ Math.ceil(content.split(' ').length / 250) }} minute{{ Math.ceil(content.split(' ').length / 250) > 1 ? 's' : '' }}</span>
+          <div class="note__stats-item">
+            <span class="note__stats-label">Reading time: </span>
+            <span class="note__stats-value">{{ Math.ceil(content.split(' ').length / 250) }} minute{{ Math.ceil(content.split(' ').length / 250) > 1 ? 's' : '' }}</span>
           </div>
         </div>
-        <div class="note-stats__divider"></div>
-        <button class="note-stats__button" (click)="closeStats()">
-          <span class="note-stats__button_icon">
-            close
-          </span>
+        <div class="note__stats-divider"></div>
+        <button class="note__stats-close" (click)="closeStats()">
+          <span class="note__stats-close-icon">close</span>
         </button>
       </div>
     </div>
