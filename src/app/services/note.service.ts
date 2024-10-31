@@ -37,7 +37,7 @@ export class NoteService {
     return this.http.get<any>(`${this.apiUrl}/api/notes`, { headers })
       .pipe(
         map(response => {
-          return { status: 'SUCCESS', notes: response };
+          return { status: 'SUCCESS', notes: response.notes };
         }),
         catchError(error => {
           return of({ status: 'ERROR', error: error.error?.error || 'Internal server error, please try again later' });
