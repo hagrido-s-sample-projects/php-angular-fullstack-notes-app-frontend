@@ -37,7 +37,12 @@ export class NoteService {
     return this.http.get<any>(`${this.apiUrl}/api/notes`, { headers })
       .pipe(
         map(response => {
-          return { status: 'SUCCESS', notes: response.notes };
+          let notes = response.notes;
+          // Normalize notes to always be an array
+          if (notes && !Array.isArray(notes)) {
+            notes = Object.values(notes);
+          }
+          return { status: 'SUCCESS', notes };
         }),
         catchError(error => {
           return of({ status: 'ERROR', error: error.error?.error || 'Internal server error, please try again later' });
