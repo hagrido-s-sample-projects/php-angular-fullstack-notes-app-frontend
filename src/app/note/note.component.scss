@@ -1,0 +1,318 @@
+.note {
+  &__container {
+    position: relative;
+    height: 100%;
+  }
+
+  &__toolbar {
+    height: 60px;
+    width: calc(100% - 72px);
+    background: #d4d4d4;
+    box-shadow: 13px 13px 26px #9b9b9b,
+                -13px -13px 26px #ffffff;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    margin: 16px;
+    border-radius: 16px;
+  }
+
+  &__toolbar-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    background: #d4d4d4;
+    box-shadow: 5px 5px 10px #c3c3c3,
+                -5px -5px 10px #e5e5e5;
+    transition: all 0.15s ease-out;
+
+    &:active {
+      background: #d4d4d4;
+      box-shadow: inset 5px 5px 10px #c3c3c3,
+                  inset -5px -5px 10px #e5e5e5;
+    }
+  }
+
+  &__toolbar-btn-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__spacer {
+    flex: 1;
+  }
+
+  &__menu {
+    position: relative;
+  }
+
+  &__menu-dropdown {
+    display: none;
+    min-width: 150px;
+    flex-direction: column;
+    gap: 8px;
+    position: absolute;
+    padding: 16px;
+    top: 60px;
+    right: -16px;
+    width: 100%;
+    background: rgba(212, 212, 212, 0.8);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+    border-radius: 16px;
+    z-index: 100;
+
+    &--open {
+      display: flex;
+    }
+  }
+
+  &__menu-item {
+    background-color: transparent;
+    border: 1px solid #b8b8b875;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: #d4d4d4;
+    transition: all 0.15s ease-out;
+
+    &:hover {
+      border-color: transparent;
+      box-shadow: 2px 2px 5px #c3c3c3,
+                  -2px -2px 5px #e5e5e5;
+    }
+
+    &:active {
+      border-color: transparent;
+      box-shadow: inset 2px 2px 5px #c3c3c3,
+                  inset -2px -2px 5px #e5e5e5;
+    }
+
+    &--danger {
+      color: #ff5555;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 148px);
+    height: calc(100% - 92px);
+    max-height: 841px;
+    max-width: 595px;
+    margin: 16px auto;
+    padding: 16px;
+    border-radius: 16px;
+    background: linear-gradient(145deg, #e0e0e0, #c8c8c8);
+    box-shadow: 20px 20px 40px #b4b4b4,
+                -20px -20px 40px #f4f4f4;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(0,0,0,0.02));
+      pointer-events: none;
+    }
+  }
+
+  &__title {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 24px;
+    font-weight: 600;
+    width: 100%;
+  }
+
+  &__metadata {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-start;
+    font-size: 12px;
+    color: #666;
+    margin-top: 8px;
+    padding: 0 4px;
+  }
+
+  &__divider {
+    height: 1px;
+    width: 100%;
+    background-color: #ccc;
+    margin: 8px 0;
+  }
+
+  &__editor {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: transparent;
+
+    textarea {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 16px;
+      font-weight: 400;
+      width: 100%;
+      resize: none;
+      overflow: hidden;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-all;
+      white-space: pre-wrap;
+    }
+  }
+
+  &__loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 300px;
+    border-radius: 0px 0px 50% 50%;
+    transition: transform 0.5s ease-in-out;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -150px;
+      left: -25%;
+      width: 150%;
+      height: 100%;
+      background: #000;
+      border-radius: 0px 0px 50% 50%;
+      filter: blur(80px);
+    }
+
+    &--hidden {
+      transform: translateY(-100%);
+      opacity: 0;
+
+      .note__loading-text {
+        transform: translate(-50%, -100%);
+      }
+    }
+
+    &--success::before {
+      background: #77d777;
+      transition: all 0.5s ease-in-out;
+    }
+  }
+
+  &__loading-text {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 28px;
+    font-weight: 300;
+    font-family: 'Dosis', serif;
+    font-optical-sizing: auto;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  &__stats-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    background: #00000020;
+  }
+
+  &__stats {
+    min-width: 200px;
+    max-width: 350px;
+    max-height: 450px;
+    background: #d4d4d4;
+    padding: 16px;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  &__stats-title {
+    font-size: 24px;
+    font-weight: 300;
+    font-family: 'Dosis', serif;
+    font-optical-sizing: auto;
+    margin: 0;
+  }
+
+  &__stats-divider {
+    height: 1px;
+    width: 100%;
+    background-color: #00000050;
+    margin: 8px 0;
+  }
+
+  &__stats-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__stats-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 4px;
+  }
+
+  &__stats-label {
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'Dosis', serif;
+    font-optical-sizing: auto;
+  }
+
+  &__stats-value {
+    font-size: 16px;
+    font-weight: 650;
+    font-family: 'Dosis', serif;
+    font-optical-sizing: auto;
+  }
+
+  &__stats-close {
+    background-color: transparent;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    background: #d4d4d4;
+    box-shadow: 5px 5px 10px #c3c3c3,
+                -5px -5px 10px #e5e5e5;
+    transition: all 0.15s ease-out;
+
+    &:active {
+      background: #d4d4d4;
+      box-shadow: inset 5px 5px 10px #c3c3c3,
+                  inset -5px -5px 10px #e5e5e5;
+    }
+  }
+}

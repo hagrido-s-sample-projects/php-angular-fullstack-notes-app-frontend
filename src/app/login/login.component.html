@@ -1,25 +1,21 @@
-<main>
-  <div class="container">
-    <div class="card">
-      <div class="card__title">
-        Welcome back
-      </div>
-      <div class="card__divider"></div>
-      <div class="card__form">
-        <div class="card__form">
-          <div class="card__form_input">
-            <input type="text" [(ngModel)]="username" placeholder="Username" required />
-          </div>
-          <div class="card__form_input">
-            <input type="password" [(ngModel)]="password" placeholder="Password" required />
-          </div>
-          <button class="card__form_button" (click)="login()">Login</button>
-          <div class="card__form_error" *ngIf="errorMessage">{{ errorMessage }}</div>
+<main class="login">
+  <div class="login__container">
+    <div class="login__card">
+      <h1 class="login__title">Welcome back</h1>
+      <div class="login__divider"></div>
+      <form class="login__form">
+        <div class="login__input-wrapper">
+          <input type="text" [(ngModel)]="username" name="username" placeholder="Username" required />
         </div>
-      </div>
+        <div class="login__input-wrapper">
+          <input type="password" [(ngModel)]="password" name="password" placeholder="Password" required />
+        </div>
+        <button class="login__submit-btn" (click)="login()">Login</button>
+        <div class="login__error" *ngIf="errorMessage">{{ errorMessage }}</div>
+      </form>
     </div>
-    <div class="card-footer">
-      <a routerLink="/register" class="card-footer__link">Don't have an account?</a>
+    <div class="login__footer">
+      <a routerLink="/register" class="login__footer-link">Don't have an account?</a>
     </div>
   </div>
 </main>

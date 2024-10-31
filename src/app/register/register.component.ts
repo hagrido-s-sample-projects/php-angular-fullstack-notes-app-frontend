@@ -18,15 +18,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
   username: string = '';
   email: string = '';
   password: string = '';
-
   errorMessage: string | null = null;
   private errorSubscription: Subscription | null = null;
+  private hasAttemptedRegister = false;
 
   constructor(private store: Store) {}
 
   ngOnInit() {
     this.errorSubscription = this.store.select(selectAuthError).subscribe(error => {
-      if (error) {
+      if (error && this.hasAttemptedRegister) {
         this.errorMessage = error.message || 'Something went wrong';
       } else {
         this.errorMessage = null;
@@ -41,9 +41,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   register() {
+    this.hasAttemptedRegister = true;
+
     if (this.username && this.email && this.password) {
       this.errorMessage = null;
-      this.store.dispatch(AuthActions.register({ username: this.username, email: this.email, password: this.password }));
+      this.store.dispatch(AuthActions.register({ 
+        username: this.username, 
+        email: this.email, 
+        password: this.password 
+      }));
     } else {
       this.errorMessage = 'All fields are required';
     }

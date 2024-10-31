@@ -1,12 +1,14 @@
-.container {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+.register {
+  &__container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
 
-  .card {
+  &__card {
     min-width: 450px;
     max-width: 600px;
     width: 100%;
@@ -14,129 +16,95 @@
     padding: 16px;
     border-radius: 16px;
     background: #d4d4d4;
-    box-shadow:  13px 13px 26px #9b9b9b,
-    -13px -13px 26px #ffffff;
+    box-shadow: 13px 13px 26px #9b9b9b,
+                -13px -13px 26px #ffffff;
     display: flex;
     flex-direction: column;
+  }
 
-    &.card__horizontal {
-      flex-direction: row;
-    }
+  &__title {
+    font-size: 36px;
+    font-weight: 200;
+    font-family: "Dosis", serif;
+    font-optical-sizing: auto;
+    text-align: center;
+    margin: 0;
+  }
 
-    .card__title {
-      font-size: 36px;
-      font-weight: 200;
-      font-family: "Dosis", serif;
-      font-optical-sizing: auto;
-      text-align: center;
-    }
+  &__subtitle {
+    font-size: 16px;
+    font-weight: 300;
+    font-family: "Dosis", serif;
+    font-optical-sizing: auto;
+    text-align: center;
+    margin-top: 8px;
+  }
 
-    .card__subtitle {
-      font-size: 16px;
-      font-weight: 300;
-      font-family: "Dosis", serif;
-      font-optical-sizing: auto;
-      text-align: center;
-    }
+  &__divider {
+    width: 100%;
+    height: 1px;
+    background: #000;
+    margin: 12px 0;
+  }
 
-    .card__divider {
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__input-wrapper {
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    background: #d4d4d4;
+    box-shadow: inset 5px 5px 10px #aaaaaa,
+                inset -5px -5px 10px #fefefe;
+
+    input {
       width: 100%;
-      height: 1px;
-      background: #000;
-      margin: 16px 0;
-
-      &.card__divider_vertical {
-        width: 1px;
-        height: 100%;
-        background: #000;
-        margin: 0 16px;
-      }
-    }
-
-    .card__form {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-
-      .card__form_input {
-        width: 100%;
-        height: 40px;
-        border-radius: 8px;
-        background: #d4d4d4;
-        box-shadow: inset 5px 5px 10px #aaaaaa,
-            inset -5px -5px 10px #fefefe;
-  
-        input {
-          width: 100%;
-          height: 100%;
-          border: none;
-          outline: none;
-          background: transparent;
-          padding: 0 16px;
-          font-size: 14px;
-        }
-      }
-
-      .card__form_button {
-        width: 100%;
-        height: 40px;
-        border-radius: 8px;
-        background: #b3c1c8;
-        box-shadow:  5px 5px 10px #acb2b6,
-                    -5px -5px 10px #e5e5e5;
-        border: none;
-        outline: none;
-        font-size: 14px;
-        font-weight: 600;
-        cursor: pointer;
-
-        transition: background 0.2s ease;
-
-        &:hover {
-          background: #b3c1c8;
-        }
-
-        &:active {
-          background: #b3c1c8;
-          box-shadow: inset 5px 5px 10px #acb2b6,
-                      inset -5px -5px 10px #bec6ca;
-        }
-      }
-
-      .card__form_error {
-        width: 100%;
-        color: #df1947;
-        font-size: 16px;
-        font-weight: 600;
-        text-align: center;
-      }
-    }
-
-    .card__section {
-      display: flex;
-      flex-direction: column;
-      gap: 4fpx;
-
-      .card__section_title {
-        font-size: 36px;
-        font-weight: 200;
-        font-family: "Dosis", serif;
-        font-optical-sizing: auto;
-        text-align: center;
-      }
-
-      .card__section_subtitle {
-        font-size: 16px;
-        font-weight: 200;
-        font-family: "Dosis", serif;
-        font-optical-sizing: auto;
-        text-align: center;
-      }
-      
+      height: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      padding: 0 16px;
+      font-size: 14px;
     }
   }
 
-  .card-footer {
+  &__submit-btn {
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    background: #b3c1c8;
+    box-shadow: 5px 5px 10px #acb2b6,
+                -5px -5px 10px #e5e5e5;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #b3c1c8;
+    }
+
+    &:active {
+      background: #b3c1c8;
+      box-shadow: inset 5px 5px 10px #acb2b6,
+                  inset -5px -5px 10px #bec6ca;
+    }
+  }
+
+  &__error {
+    color: #df1947;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  &__footer {
     width: 200px;
     display: flex;
     justify-content: center;
@@ -146,10 +114,10 @@
     border-radius: 16px;
     background: #d4d4d4;
     box-shadow: inset 5px 5px 10px #b4b4b4,
-    inset -5px -5px 10px #f4f4f4;
+                inset -5px -5px 10px #f4f4f4;
   }
 
-  .card-footer__link {
+  &__footer-link {
     text-decoration: none;
     color: #000;
     font-size: 15px;

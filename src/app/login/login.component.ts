@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import * as AuthActions from '../store/auth/auth.actions';
-import { selectAccessToken } from '../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +13,6 @@ import { selectAccessToken } from '../store/auth/auth.selectors';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  title = 'Login';
-
   username: string = '';
   password: string = '';
   errorMessage: string | null = null;
@@ -25,7 +22,10 @@ export class LoginComponent {
   login() {
     if (this.username && this.password) {
       this.errorMessage = null;
-      this.store.dispatch(AuthActions.login({ username: this.username, password: this.password }));
+      this.store.dispatch(AuthActions.login({ 
+        username: this.username, 
+        password: this.password 
+      }));
     } else {
       this.errorMessage = 'All fields are required';
     }

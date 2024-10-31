@@ -3,6 +3,7 @@ import { NgClass } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as AuthActions from '../store/auth/auth.actions';
+
 @Component({
   selector: 'app-dashboard-layout',
   standalone: true,
@@ -31,7 +32,6 @@ export class DashboardLayoutComponent {
     this.isMenuOpen = false;
   }
 
-  // Add methods for each menu option
   onProfileClick() {
     console.log('Profile clicked');
     this.closeMenu();

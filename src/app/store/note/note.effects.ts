@@ -44,4 +44,35 @@ export class NoteEffects {
       ))
     )
   );
+
+  getNote$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(NoteActions.getNote),
+      switchMap(({ id }) => this.noteService.getNote(id).pipe(map(response => NoteActions.getNoteSuccess({ note: response.note }))))
+    )
+  );
+
+  updateNote$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(NoteActions.updateNote),
+      switchMap(({ id, title, content }) => this.noteService.updateNote(id, title, content).pipe(map(response => NoteActions.updateNoteSuccess({ note: response.note }))))
+    )
+  );
+
+  deleteNote$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(NoteActions.deleteNote),
+      switchMap(({ id }) => this.noteService.deleteNote(id).pipe(
+        map(() => NoteActions.deleteNoteSuccess({ id })),
+        catchError(error => of(NoteActions.deleteNoteFailure({ error: error.message })))
+      ))
+    )
+  );
+
+  deleteNoteSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(NoteActions.deleteNoteSuccess),
+      map(() => NoteActions.getNotes())
+    )
+  );
 }

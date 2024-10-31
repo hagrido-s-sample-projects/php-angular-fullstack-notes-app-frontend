@@ -37,11 +37,52 @@ export class NoteService {
     return this.http.get<any>(`${this.apiUrl}/api/notes`, { headers })
       .pipe(
         map(response => {
-          return { status: 'SUCCESS', notes: response };
+          let notes = response.notes;
+          // Normalize notes to always be an array
+          if (notes && !Array.isArray(notes)) {
+            notes = Object.values(notes);
+          }
+          return { status: 'SUCCESS', notes };
         }),
         catchError(error => {
           return of({ status: 'ERROR', error: error.error?.error || 'Internal server error, please try again later' });
         })
+      );
+  }
+
+  getNote(id: string): Observable<{status: string, note?: any, error?: string}> {
+    const accessToken = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
+
+    return this.http.get<any>(`${this.apiUrl}/api/note/${id}`, { headers })
+      .pipe(
+        map(response => {
+          return { status: 'SUCCESS', note: response.note };
+        }),
+      );
+  }
+
+  updateNote(id: string, title: string, content: string): Observable<{status: string, note?: any, error?: string}> {
+    const accessToken = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
+
+    return this.http.put<any>(`${this.apiUrl}/api/note/${id}`, { title, content }, { headers })
+      .pipe(
+        map(response => {
+          return { status: 'SUCCESS', note: response.note };
+        }),
+      );
+  }
+
+  deleteNote(id: string): Observable<{status: string, error?: string}> {
+    const accessToken = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
+
+    return this.http.delete<any>(`${this.apiUrl}/api/note/${id}`, { headers })
+      .pipe(
+        map(response => {
+          return { status: 'SUCCESS' };
+        }),
       );
   }
 }

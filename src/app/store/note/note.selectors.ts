@@ -23,3 +23,8 @@ export const selectTotalNotes = createSelector(
   selectAllNotes,
   (notes: Note[]) => notes.length
 );
+
+export const selectOpenedNote = createSelector(
+  selectNoteState,
+  (state: NoteState) => state.openedNote
+);

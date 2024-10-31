@@ -146,7 +146,6 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.validateTokenSuccess),
       tap(() => {
-        this.router.navigate(['/dashboard']);
       })
     ),
     { dispatch: false }
