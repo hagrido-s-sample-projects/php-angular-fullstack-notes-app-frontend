@@ -182,7 +182,9 @@ export class NoteComponent implements OnInit, OnDestroy {
   }
 
   deleteNote(): void {
-    // TODO: Implement delete functionality
-    this.router.navigate(['/dashboard']);
+    if (this.noteId) {
+      this.store.dispatch(NoteActions.deleteNote({ id: this.noteId }));
+      this.router.navigate(['/dashboard']);
+    }
   }
 }

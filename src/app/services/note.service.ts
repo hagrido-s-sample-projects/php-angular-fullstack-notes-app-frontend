@@ -68,4 +68,16 @@ export class NoteService {
         }),
       );
   }
+
+  deleteNote(id: string): Observable<{status: string, error?: string}> {
+    const accessToken = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
+
+    return this.http.delete<any>(`${this.apiUrl}/api/note/${id}`, { headers })
+      .pipe(
+        map(response => {
+          return { status: 'SUCCESS' };
+        }),
+      );
+  }
 }

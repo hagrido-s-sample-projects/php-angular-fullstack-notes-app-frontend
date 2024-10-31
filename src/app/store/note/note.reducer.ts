@@ -38,5 +38,9 @@ export const noteReducer = createReducer(
   on(NoteActions.updateNoteSuccess, (state, { note }) => ({
     ...state,
     openedNote: note
+  })),
+  on(NoteActions.deleteNoteSuccess, (state, { id }) => ({
+    ...state,
+    notes: state.notes.filter(note => note.id?.toString() === id)
   }))
 );
