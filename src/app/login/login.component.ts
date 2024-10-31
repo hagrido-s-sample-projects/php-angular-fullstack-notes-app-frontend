@@ -13,8 +13,6 @@ import * as AuthActions from '../store/auth/auth.actions';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  title = 'Login';
-
   username: string = '';
   password: string = '';
   errorMessage: string | null = null;
@@ -24,7 +22,10 @@ export class LoginComponent {
   login() {
     if (this.username && this.password) {
       this.errorMessage = null;
-      this.store.dispatch(AuthActions.login({ username: this.username, password: this.password }));
+      this.store.dispatch(AuthActions.login({ 
+        username: this.username, 
+        password: this.password 
+      }));
     } else {
       this.errorMessage = 'All fields are required';
     }
