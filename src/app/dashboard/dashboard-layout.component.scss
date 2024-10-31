@@ -1,21 +1,23 @@
 @import "../../assets/colors.scss";
 
-.container {
-  position: relative;
-  padding-top: 92px; // 60px (header height) + 16px (top margin) + 16px (extra space)
+.dashboard {
+  &__container {
+    position: relative;
+    padding-top: 92px;
 
-  &::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 76px; // Reduced to show content under bottom padding
-    background: #d4d4d4;
-    z-index: 999; // Just below the header
+    &::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 76px;
+      background: #d4d4d4;
+      z-index: 999;
+    }
   }
 
-  .header {
+  &__header {
     position: fixed;
     top: 16px;
     left: 16px;
@@ -31,88 +33,88 @@
     justify-content: left;
     padding: 0 20px;
     border-radius: 16px;
+  }
 
-    .header__title {
-      font-size: 28px;
-      font-weight: 400;
+  &__logo {
+    font-size: 28px;
+    font-weight: 400;
+    font-family: "Dosis", serif;
+    font-optical-sizing: auto;
+
+    &--bold {
+      font-weight: 600;
       font-family: "Dosis", serif;
       font-optical-sizing: auto;
-
-      .header__title_bold {
-        font-weight: 600;
-        font-family: "Dosis", serif;
-        font-optical-sizing: auto;
-      }
     }
+  }
 
-    .spacer {
-      flex: 1;
-    }
+  &__spacer {
+    flex: 1;
+  }
 
-    .header__button {
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      font-size: 18px;
-      padding: 8px 16px;
-      border-radius: 8px;
+  &__menu {
+    position: relative;
+  }
+
+  &__menu-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: #d4d4d4;
+    box-shadow: 5px 5px 10px #c3c3c3,
+                -5px -5px 10px #e5e5e5;
+    transition: all 0.15s ease-out;
+
+    &:active {
       background: #d4d4d4;
-      box-shadow: 5px 5px 10px #c3c3c3,
-                  -5px -5px 10px #e5e5e5;
-      transition: all 0.15s ease-out;
+      box-shadow: inset 5px 5px 10px #c3c3c3,
+                  inset -5px -5px 10px #e5e5e5;
+    }
+  }
 
-      &:active {
-        background: #d4d4d4;
-        box-shadow: inset 5px 5px 10px #c3c3c3,
-                    inset -5px -5px 10px #e5e5e5;
-      }
+  &__menu-dropdown {
+    display: none;
+    min-width: 150px;
+    flex-direction: column;
+    gap: 8px;
+    position: absolute;
+    padding: 16px;
+    top: 60px;
+    right: -16px;
+    width: 100%;
+    background: rgba(212, 212, 212, 0.8);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+    border-radius: 16px;
+
+    &--open {
+      display: flex;
+    }
+  }
+
+  &__menu-item {
+    background-color: transparent;
+    border: 1px solid #b8b8b875;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: #d4d4d4;
+    transition: all 0.15s ease-out;
+
+    &:hover {
+      border-color: transparent;
+      box-shadow: 2px 2px 5px #c3c3c3,
+                  -2px -2px 5px #e5e5e5;
     }
 
-    .menu__wrapper {
-      position: relative;
-    }
-
-    .menu__content {
-      display: none;
-
-      &_open {
-        display: flex;
-        min-width: 150px;
-        flex-direction: column;
-        gap: 8px;
-        position: absolute;
-        padding: 16px;
-        top: 60px;
-        right: -16px;
-        width: 100%;
-        background: rgba(212, 212, 212, 0.8);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
-        border-radius: 16px;
-      }
-
-      .menu__content_button {
-        background-color: transparent;
-        border: 1px solid #b8b8b875;
-        cursor: pointer;
-        font-size: 18px;
-        padding: 8px 16px;
-        border-radius: 8px;
-        background: #d4d4d4;
-        transition: all 0.15s ease-out;
-
-        &:hover {
-          border-color: transparent;
-          box-shadow: 2px 2px 5px #c3c3c3,
-                      -2px -2px 5px #e5e5e5;
-        }
-
-        &:active {
-          border-color: transparent;
-          box-shadow: inset 2px 2px 5px #c3c3c3,
-                      inset -2px -2px 5px #e5e5e5;
-        }
-      }
+    &:active {
+      border-color: transparent;
+      box-shadow: inset 2px 2px 5px #c3c3c3,
+                  inset -2px -2px 5px #e5e5e5;
     }
   }
 }
